@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="S20" parent="">
+		<item name="android:textSize">@dimen/S20</item>
+	</style>
+
+	<style name="S16" parent="">
+		<item name="android:textSize">@dimen/S16</item>
+	</style>
+
+	<style name="S16White" parent="S16">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="S20White" parent="S20">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+</resources>
