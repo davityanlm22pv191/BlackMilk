@@ -5,42 +5,59 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 	// val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 	private companion object {
-		const val PICK_IMAGE_REQUEST = 1
+		const val PICK_IMAGE_ONE = 1
+		const val PICK_IMAGE_TWO = 2
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
+		val btnGalleryOne = findViewById<TextView>(R.id.btnChooseOneFromGallery)
+		val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
+		btnGalleryOne.setOnClickListener { this.setImageOneFromGallery() }
+		btnGalleryTwo.setOnClickListener { this.setImageTwoFromGallery() }
+	}
 
-		val PICK_IMAGE_REQUEST = 1
+	// Обрабатываем результат выбора изображения
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		(data != null && data.data != null).let {
+			// Получаем URI выбранного изображения
+			val imageUri = data?.data
 
+			// Преобразуем URI в Bitmap
+			val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+
+			if (requestCode == PICK_IMAGE_ONE && resultCode == RESULT_OK) {
+				findViewById<ImageView>(R.id.ivCurrentImageOne).setImageBitmap(bitmap)
+			} else if (requestCode == PICK_IMAGE_TWO && resultCode == RESULT_OK) {
+				findViewById<ImageView>(R.id.ivCurrentImageTwo).setImageBitmap(bitmap)
+			}
+		}
+	}
+
+	private fun setImageOneFromGallery() {
 		// Создаем Intent для открытия галереи
 		val intent = Intent()
 		intent.type = "image/*"
 		intent.action = Intent.ACTION_GET_CONTENT
 
 		// Запускаем Intent и ждем результат
-		startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+		startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_ONE)
 	}
 
-	// Обрабатываем результат выбора изображения
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		super.onActivityResult(requestCode, resultCode, data)
+	private fun setImageTwoFromGallery() {
+		// Создаем Intent для открытия галереи
+		val intent = Intent()
+		intent.type = "image/*"
+		intent.action = Intent.ACTION_GET_CONTENT
 
-		if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-			// Получаем URI выбранного изображения
-			val imageUri = data.data
-
-			// Преобразуем URI в Bitmap
-			val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-
-			// Используем выбранное изображение
-//			val ivPhoto = findViewById<ImageView>(R.id.ivPhotoFromGallery)
-//			ivPhoto.setImageBitmap(bitmap)
-		}
+		// Запускаем Intent и ждем результат
+		startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_TWO)
 	}
 }
