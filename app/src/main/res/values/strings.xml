@@ -1,8 +1,8 @@
 <resources>
-	<string name="app_name">Diplom</string>
-	<string name="main_screen_title">Обнаружение дубликатов изображений</string>
-	<string name="main_screen_current_image_one">Текущее изображение 1</string>
-	<string name="main_screen_current_image_two">Текущее изображение 2</string>
+	<string name="app_name">Диплом</string>
+	<string name="main_screen_title">Поиск дубликатов изображений</string>
+	<string name="main_screen_current_image_one">Изображение 1</string>
+	<string name="main_screen_current_image_two">Изображение 2</string>
 	<string name="main_screen_choose_image_source">Выберите источник</string>
 	<string name="main_screen_button_choose_from_gallery">Галерея</string>
 	<string name="main_screen_button_choose_from_link">Ссылка</string>

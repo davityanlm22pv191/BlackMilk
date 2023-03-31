@@ -19,35 +19,36 @@
 		app:layout_constraintTop_toTopOf="parent" />
 
 	<View
-		android:id="@+id/viewSeparator"
-		android:layout_width="1dp"
+		android:id="@+id/viewVerticalSeparator"
+		android:layout_width="2dp"
 		android:layout_height="0dp"
 		android:background="@color/white"
-		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintBottom_toBottomOf="@id/viewHorizontalSeparator"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
 	<TextView
-		android:layout_marginTop="16dp"
+		android:layout_marginHorizontal="4dp"
 		android:id="@+id/tvCurrentImageOne"
 		style="@style/S16White"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
 		android:text="@string/main_screen_current_image_one"
-		app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
 	<TextView
-		android:layout_marginTop="16dp"
 		android:id="@+id/tvCurrentImageTwo"
 		style="@style/S16White"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
 		android:text="@string/main_screen_current_image_two"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="@id/viewSeparator"
+		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
 		app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
 	<ImageView
@@ -55,7 +56,7 @@
 		android:layout_width="150dp"
 		android:layout_height="150dp"
 		android:layout_marginTop="16dp"
-		app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageOne" />
 
@@ -65,7 +66,7 @@
 		android:layout_height="150dp"
 		android:layout_marginTop="16dp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="@id/viewSeparator"
+		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
 		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageOne" />
 
 	<TextView
@@ -75,16 +76,17 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
 		android:text="@string/main_screen_choose_image_source"
-		app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
 
 	<LinearLayout
+		android:id="@+id/llChooseSourceList"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
 		android:orientation="vertical"
-		app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/tvChooseOneImageSrc">
 
@@ -97,7 +99,7 @@
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_gallery"
-			app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+			app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
 
@@ -111,7 +113,7 @@
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_link"
-			app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+			app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
 
@@ -125,7 +127,7 @@
 		android:layout_marginTop="16dp"
 		android:text="@string/main_screen_choose_image_source"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="@id/viewSeparator"
+		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
 		app:layout_constraintTop_toBottomOf="@id/ivCurrentImageTwo" />
 
 	<LinearLayout
@@ -134,7 +136,7 @@
 		android:layout_marginTop="16dp"
 		android:orientation="vertical"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="@id/viewSeparator"
+		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
 		app:layout_constraintTop_toBottomOf="@id/tvChooseTwoImageSrc">
 
 		<TextView
@@ -146,7 +148,7 @@
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_gallery"
-			app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+			app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
 
@@ -160,12 +162,20 @@
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_link"
-			app:layout_constraintEnd_toEndOf="@id/viewSeparator"
+			app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
 
 	</LinearLayout>
 
-	
+	<View
+		android:id="@+id/viewHorizontalSeparator"
+		android:layout_marginTop="16dp"
+		android:layout_width="match_parent"
+		android:layout_height="2dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/llChooseSourceList"
+		android:background="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
