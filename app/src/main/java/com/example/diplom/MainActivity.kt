@@ -1,24 +1,32 @@
 package com.example.diplom
 
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
-	// val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
 	private companion object {
 		const val PICK_IMAGE_ONE = 1
 		const val PICK_IMAGE_TWO = 2
 	}
+
+	private var lastSelectedImageOneBitmap: Bitmap? = null
+	private var lastSelectedImageTwoBitmap: Bitmap? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		val btnGalleryOne = findViewById<TextView>(R.id.btnChooseOneFromGallery)
 		val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
+		val btnLinkOne = findViewById<TextView>(R.id.btnChooseOneFromLink)
+		btnLinkOne.setOnClickListener {
+			this.loadImageOneFromLink() }
 		btnGalleryOne.setOnClickListener { this.setImageOneFromGallery() }
 		btnGalleryTwo.setOnClickListener { this.setImageTwoFromGallery() }
 	}
@@ -34,11 +42,21 @@ class MainActivity : AppCompatActivity() {
 			val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
 
 			if (requestCode == PICK_IMAGE_ONE && resultCode == RESULT_OK) {
+				lastSelectedImageOneBitmap = bitmap
 				findViewById<ImageView>(R.id.ivCurrentImageOne).setImageBitmap(bitmap)
 			} else if (requestCode == PICK_IMAGE_TWO && resultCode == RESULT_OK) {
+				lastSelectedImageTwoBitmap = bitmap
 				findViewById<ImageView>(R.id.ivCurrentImageTwo).setImageBitmap(bitmap)
 			}
 		}
+	}
+
+	private fun loadImageOneFromLink() {
+		// хард код чтобы получить лого google
+//		Glide.with(this)
+//			.asBitmap()
+//			.load("https://www.google.ru/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png")
+//			.into(findViewById<ImageView>(R.id.ivCurrentImageOne))
 	}
 
 	private fun setImageOneFromGallery() {
