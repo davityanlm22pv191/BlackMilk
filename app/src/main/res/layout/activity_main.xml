@@ -51,25 +51,57 @@
 		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
 		app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-	<ImageView
-		android:id="@+id/ivCurrentImageOne"
+	<FrameLayout
+		android:id="@+id/flCurrentImageOne"
 		android:layout_width="150dp"
 		android:layout_height="150dp"
 		android:layout_marginTop="16dp"
-		android:scaleType="fitCenter"
 		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageOne" />
+		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageOne">
 
-	<ImageView
-		android:id="@+id/ivCurrentImageTwo"
+		<TextView
+			android:id="@+id/tvImageOneNotSelectedMsg"
+			style="@style/S16White"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:text="@string/main_screen_image_not_selected_msg"/>
+
+		<ImageView
+			android:id="@+id/ivCurrentImageOne"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@drawable/background_current_image"
+			android:scaleType="fitCenter" />
+
+	</FrameLayout>
+
+	<FrameLayout
+		android:id="@+id/flCurrentImageTwo"
 		android:layout_width="150dp"
 		android:layout_height="150dp"
 		android:layout_marginTop="16dp"
-		android:scaleType="fitCenter"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
-		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageOne" />
+		app:layout_constraintTop_toBottomOf="@id/tvCurrentImageTwo">
+
+		<TextView
+			android:id="@+id/tvImageTwoNotSelectedMsg"
+			style="@style/S16White"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:text="@string/main_screen_image_not_selected_msg"/>
+
+		<ImageView
+			android:id="@+id/ivCurrentImageTwo"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:background="@drawable/background_current_image"
+			android:scaleType="fitCenter" />
+
+	</FrameLayout>
 
 	<TextView
 		android:id="@+id/tvChooseOneImageSrc"
@@ -80,7 +112,7 @@
 		android:text="@string/main_screen_choose_image_source"
 		app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparator"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/ivCurrentImageOne" />
+		app:layout_constraintTop_toBottomOf="@id/flCurrentImageOne" />
 
 	<LinearLayout
 		android:id="@+id/llChooseSourceList"
@@ -130,7 +162,7 @@
 		android:text="@string/main_screen_choose_image_source"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="@id/viewVerticalSeparator"
-		app:layout_constraintTop_toBottomOf="@id/ivCurrentImageTwo" />
+		app:layout_constraintTop_toBottomOf="@id/flCurrentImageTwo" />
 
 	<LinearLayout
 		android:layout_width="wrap_content"

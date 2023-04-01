@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
@@ -42,9 +43,11 @@ class MainActivity : AppCompatActivity() {
 			val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
 
 			if (requestCode == PICK_IMAGE_ONE && resultCode == RESULT_OK) {
+				findViewById<TextView>(R.id.tvImageOneNotSelectedMsg).isVisible = false
 				lastSelectedImageOneBitmap = bitmap
 				findViewById<ImageView>(R.id.ivCurrentImageOne).setImageBitmap(bitmap)
 			} else if (requestCode == PICK_IMAGE_TWO && resultCode == RESULT_OK) {
+				findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg).isVisible = false
 				lastSelectedImageTwoBitmap = bitmap
 				findViewById<ImageView>(R.id.ivCurrentImageTwo).setImageBitmap(bitmap)
 			}
