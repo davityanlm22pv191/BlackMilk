@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
@@ -19,6 +18,15 @@ class ChooseImageFromLinkFragment(
 	val link: String?,
 ) : Fragment(R.layout.choose_image_from_link),
 	ChooseImageFromLinkContract {
+
+	companion object {
+		fun newInstance(bitmapImage: Bitmap?, link: String?,) : ChooseImageFromLinkFragment {
+			val args = Bundle()
+			val fragment = ChooseImageFromLinkFragment(bitmapImage, link)
+			fragment.arguments = args
+			return fragment
+		}
+	}
 
 	//region ==================== Lifecycle ====================
 

@@ -12,8 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.example.diplom.MainActivity
 import com.example.diplom.R
+import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
 
 class HomeFragment : Fragment(), HomeContract {
 
@@ -21,6 +21,7 @@ class HomeFragment : Fragment(), HomeContract {
 	private var lastSelectedImageTwoBitmap: Bitmap? = null
 
 	private companion object {
+		const val LOAD_IMAGE_FROM_LINK_FRAGMENT = "LOAD_IMAGE_FROM_LINK_FRAGMENT"
 		const val PICK_IMAGE_ONE = 1
 		const val PICK_IMAGE_TWO = 2
 	}
@@ -52,12 +53,27 @@ class HomeFragment : Fragment(), HomeContract {
 			val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
 			val btnLinkOne = findViewById<TextView>(R.id.btnChooseOneFromLink)
 			val btnLinkTwo = findViewById<TextView>(R.id.btnChooseTwoFromLink)
-//			btnLinkOne.setOnClickListener { this.loadImageOneFromLink() }
-//			btnLinkTwo.setOnClickListener { this.loadImageTwoFromLink() }
+			btnLinkOne.setOnClickListener { loadImageOneFromLink() }
+			btnLinkTwo.setOnClickListener { loadImageTwoFromLink() }
 			btnGalleryOne.setOnClickListener { setImageOneFromGallery() }
 			btnGalleryTwo.setOnClickListener { setImageTwoFromGallery() }
 		}
 	}
+
+	private fun loadImageTwoFromLink() {
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		childFragmentManager.beginTransaction()
+			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
+			.commitNow()
+	}
+
+	private fun loadImageOneFromLink() {
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		childFragmentManager.beginTransaction()
+			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
+			.commitNow()
+	}
+
 
 	private fun setImageOneFromGallery() {
 		// Создаем Intent для открытия галереи
