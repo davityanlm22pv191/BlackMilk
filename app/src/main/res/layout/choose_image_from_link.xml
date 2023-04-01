@@ -5,6 +5,32 @@
 	android:layout_height="match_parent"
 	android:background="@color/black26">
 
+	<LinearLayout
+		android:id="@+id/llToolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="16dp"
+		android:layout_marginTop="16dp"
+		android:orientation="horizontal"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<ImageView
+			android:id="@+id/ivArrowBack"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:paddingEnd="4dp"
+			android:src="@drawable/ic_arrow_back" />
+
+		<TextView
+			style="@style/S20White"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:text="@string/choose_image_from_link_title" />
+
+	</LinearLayout>
+
 	<TextView
 		android:id="@+id/tvPutLinkHereMsg"
 		style="@style/S12White"
@@ -13,7 +39,7 @@
 		android:layout_marginHorizontal="16dp"
 		android:layout_marginTop="16dp"
 		android:text="@string/choose_image_from_link_put_your_link_here_msg"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toBottomOf="@id/llToolbar" />
 
 	<EditText
 		android:id="@+id/editTextLink"
@@ -36,6 +62,7 @@
 		app:layout_constraintTop_toBottomOf="@id/editTextLink">
 
 		<TextView
+			android:id="@+id/tvIsYourImageMsg"
 			style="@style/S16White"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
