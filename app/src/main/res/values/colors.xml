@@ -15,4 +15,10 @@
 
 	<color name="pinkDC">#D566DC</color>
 	<color name="pinkFF">#9666FF</color>
+
+	<color name="red46">#FA3446</color>
+	<color name="red50">#FEE6E8</color>
+
+	<color name="green46">#15A746</color>
+	<color name="greenE3">#DCF2E3</color>
 </resources>

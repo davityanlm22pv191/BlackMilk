@@ -66,12 +66,12 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:gravity="center"
-			android:text="@string/main_screen_image_not_selected_msg"/>
+			android:text="@string/main_screen_image_not_selected_msg" />
 
 		<ImageView
 			android:id="@+id/ivCurrentImageOne"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="150dp"
 			android:background="@drawable/background_current_image"
 			android:scaleType="fitCenter" />
 
@@ -92,7 +92,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:gravity="center"
-			android:text="@string/main_screen_image_not_selected_msg"/>
+			android:text="@string/main_screen_image_not_selected_msg" />
 
 		<ImageView
 			android:id="@+id/ivCurrentImageTwo"

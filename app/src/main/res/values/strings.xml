@@ -1,4 +1,5 @@
 <resources>
+
 	<!--main screen region-->
 	<string name="app_name">Диплом</string>
 	<string name="main_screen_title">Поиск дубликатов изображений</string>
@@ -10,4 +11,12 @@
 	<string name="main_screen_image_not_selected_msg">Изображение не выбрано.\n Используйте кнопки ниже</string>
 	<!--end region-->
 
+	<!--choose image from link region-->
+	<string name="choose_image_from_link_put_your_link_here_msg">Вставьте ниже вашу ссылку, а я попробую найти изображение. Убедитесь, что ссылка действительно ведет на изображение.</string>
+	<string name="choose_image_from_link_text_edit_hint">Ссылка на ваше изображение</string>
+	<string name="choose_image_from_link_wait_your_link">Ожидание ввода ссылки.\nВаше изображение появится здесь</string>
+	<string name="choose_image_from_link_is_your_image">Изображение найдено правильно?</string>
+	<string name="choose_image_from_link_agree">Да</string>
+	<string name="choose_image_from_link_clear_link">Очистить</string>
+	<!--end region-->
 </resources>
