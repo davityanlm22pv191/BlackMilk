@@ -20,10 +20,10 @@ class HomeFragment : Fragment(), HomeContract {
 	private var lastSelectedImageOneBitmap: Bitmap? = null
 	private var lastSelectedImageTwoBitmap: Bitmap? = null
 
-	private companion object {
+	companion object {
 		const val LOAD_IMAGE_FROM_LINK_FRAGMENT = "LOAD_IMAGE_FROM_LINK_FRAGMENT"
-		const val PICK_IMAGE_ONE = 1
-		const val PICK_IMAGE_TWO = 2
+		private const val PICK_IMAGE_ONE = 1
+		private const val PICK_IMAGE_TWO = 2
 	}
 
 	// region ==================== Lifecycle ====================

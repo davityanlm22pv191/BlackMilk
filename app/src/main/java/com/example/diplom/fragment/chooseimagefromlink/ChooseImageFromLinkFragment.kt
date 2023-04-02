@@ -9,18 +9,19 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
 
 class ChooseImageFromLinkFragment(
-	val bitmapImage: Bitmap?,
-	val link: String?,
-) : Fragment(R.layout.choose_image_from_link),
+	private val bitmapImage: Bitmap?,
+	private val link: String?,
+) : Fragment(R.layout.fragment_choose_image_from_link),
 	ChooseImageFromLinkContract {
 
 	companion object {
-		fun newInstance(bitmapImage: Bitmap?, link: String?,) : ChooseImageFromLinkFragment {
+		fun newInstance(bitmapImage: Bitmap?, link: String?): ChooseImageFromLinkFragment {
 			val args = Bundle()
 			val fragment = ChooseImageFromLinkFragment(bitmapImage, link)
 			fragment.arguments = args
@@ -35,7 +36,7 @@ class ChooseImageFromLinkFragment(
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		val view = inflater.inflate(R.layout.choose_image_from_link, container, false)
+		val view = inflater.inflate(R.layout.fragment_choose_image_from_link, container, false)
 		initUI(view)
 
 		return view
@@ -49,28 +50,51 @@ class ChooseImageFromLinkFragment(
 		editText.text.clear()
 	}
 
+	override fun close() {
+		parentFragmentManager.beginTransaction()
+			.remove(this)
+			.commit()
+	}
+
 	// endregion
 
 	//region ==================== Internal ====================
 
 	private fun initUI(view: View) {
+		requireActivity().onBackPressedDispatcher.addCallback(
+			viewLifecycleOwner,
+			object : OnBackPressedCallback(true) {
+				override fun handleOnBackPressed() {
+					close()
+				}
+			})
 		view.apply {
 			this.setOnClickListener(null)
-
+			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
 			if (link != null && bitmapImage != null) {
-				findViewById<ImageView>(R.id.ivImageFromLink).setImageBitmap(bitmapImage)
-				findViewById<EditText>(R.id.editTextLink).setText(link)
-				findViewById<ImageView>(R.id.tvImageFromLinkStateInfo).isVisible = false
-				findViewById<LinearLayout>(R.id.llAgreeOrClearButtons).isVisible = true
-				findViewById<TextView>(R.id.tvIsYourImageMsg).isVisible = true
+				setViewWithParameters(view)
+			} else {
+				setViewWithoutParameters(view)
 			}
-			findViewById<ImageView>(R.id.tvImageFromLinkStateInfo).isVisible = true
-			findViewById<LinearLayout>(R.id.llAgreeOrClearButtons).isVisible = false
-			findViewById<TextView>(R.id.tvIsYourImageMsg).isVisible = false
-			findViewById<EditText>(R.id.editTextLink).apply {
-				setOnClickListener { clearTextEdit(this) }
-			}
+
 		}
+	}
+
+	private fun setViewWithoutParameters(view: View) {
+		view.findViewById<ImageView>(R.id.tvImageFromLinkStateInfo).isVisible = true
+		view.findViewById<LinearLayout>(R.id.llAgreeOrClearButtons).isVisible = false
+		view.findViewById<TextView>(R.id.tvIsYourImageMsg).isVisible = false
+		view.findViewById<EditText>(R.id.editTextLink).apply {
+			setOnClickListener { clearTextEdit(this) }
+		}
+	}
+
+	private fun setViewWithParameters(view: View) {
+		view.findViewById<ImageView>(R.id.ivImageFromLink).setImageBitmap(bitmapImage)
+		view.findViewById<EditText>(R.id.editTextLink).setText(link)
+		view.findViewById<ImageView>(R.id.tvImageFromLinkStateInfo).isVisible = false
+		view.findViewById<LinearLayout>(R.id.llAgreeOrClearButtons).isVisible = true
+		view.findViewById<TextView>(R.id.tvIsYourImageMsg).isVisible = true
 	}
 
 	// endregion

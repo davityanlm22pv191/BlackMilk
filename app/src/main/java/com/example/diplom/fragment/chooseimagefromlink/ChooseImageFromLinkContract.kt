@@ -6,4 +6,5 @@ interface ChooseImageFromLinkContract {
 
 	fun clearTextEdit(editText: EditText)
 
+	fun close()
 }
