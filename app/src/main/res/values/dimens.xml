@@ -3,6 +3,7 @@
 
 	<dimen name="S12">12dp</dimen>
 	<dimen name="S16">16dp</dimen>
+	<dimen name="S18">18dp</dimen>
 	<dimen name="S20">20dp</dimen>
 
 </resources>

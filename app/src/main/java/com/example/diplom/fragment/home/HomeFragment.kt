@@ -72,14 +72,14 @@ class HomeFragment : Fragment(), HomeContract {
 	// region ==================== HomeContract ====================
 
 	override fun loadImageTwoFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, PICK_IMAGE_TWO)
 		childFragmentManager.beginTransaction()
 			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
 			.commitNow()
 	}
 
 	override fun loadImageOneFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, PICK_IMAGE_ONE)
 		childFragmentManager.beginTransaction()
 			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
 			.commitNow()
@@ -111,7 +111,6 @@ class HomeFragment : Fragment(), HomeContract {
 			PICK_IMAGE_TWO
 		)
 	}
-
 
 
 	// endregion
