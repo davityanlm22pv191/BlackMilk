@@ -61,6 +61,19 @@ class ChooseImageFromLinkFragment(
 	//region ==================== Internal ====================
 
 	private fun initUI(view: View) {
+		onBackClicked()
+		view.setOnClickListener(null)
+		view.findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+
+		if (link != null && bitmapImage != null) {
+			setViewWithParameters(view)
+		} else {
+			setViewWithoutParameters(view)
+		}
+
+	}
+
+	private fun onBackClicked() {
 		requireActivity().onBackPressedDispatcher.addCallback(
 			viewLifecycleOwner,
 			object : OnBackPressedCallback(true) {
@@ -68,16 +81,6 @@ class ChooseImageFromLinkFragment(
 					close()
 				}
 			})
-		view.apply {
-			this.setOnClickListener(null)
-			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
-			if (link != null && bitmapImage != null) {
-				setViewWithParameters(view)
-			} else {
-				setViewWithoutParameters(view)
-			}
-
-		}
 	}
 
 	private fun setViewWithoutParameters(view: View) {

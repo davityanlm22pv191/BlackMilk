@@ -41,6 +41,34 @@ class HomeFragment : Fragment(), HomeContract {
 
 	// endregion
 
+	// region ==================== Override ====================
+
+	// Обрабатываем результат выбора изображения
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		(data != null && data.data != null).let {
+			// Получаем URI выбранного изображения
+			val imageUri = data?.data
+
+			// Преобразуем URI в Bitmap
+			val bitmap =
+				MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
+
+			if (requestCode == PICK_IMAGE_ONE && resultCode == AppCompatActivity.RESULT_OK) {
+				view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
+				lastSelectedImageOneBitmap = bitmap
+				view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(bitmap)
+			} else if (requestCode == PICK_IMAGE_TWO && resultCode == AppCompatActivity.RESULT_OK) {
+				view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
+				lastSelectedImageTwoBitmap = bitmap
+				view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)?.setImageBitmap(bitmap)
+			} else {
+			}
+		}
+	}
+
+	// endregion
+
 	// region ==================== Internal ====================
 
 	private fun initUI(view: View) {
@@ -99,31 +127,6 @@ class HomeFragment : Fragment(), HomeContract {
 			Intent.createChooser(intent, "Select Picture"),
 			PICK_IMAGE_TWO
 		)
-	}
-
-	// Обрабатываем результат выбора изображения
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		super.onActivityResult(requestCode, resultCode, data)
-		(data != null && data.data != null).let {
-			// Получаем URI выбранного изображения
-			val imageUri = data?.data
-
-			// Преобразуем URI в Bitmap
-			val bitmap =
-				MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
-
-			if (requestCode == PICK_IMAGE_ONE && resultCode == AppCompatActivity.RESULT_OK) {
-				view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
-				lastSelectedImageOneBitmap = bitmap
-				view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(bitmap)
-			} else if (requestCode == PICK_IMAGE_TWO && resultCode == AppCompatActivity.RESULT_OK) {
-				view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
-				lastSelectedImageTwoBitmap = bitmap
-				view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)?.setImageBitmap(bitmap)
-			} else {
-
-			}
-		}
 	}
 
 	// endregion
