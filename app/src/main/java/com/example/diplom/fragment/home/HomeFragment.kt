@@ -69,6 +69,53 @@ class HomeFragment : Fragment(), HomeContract {
 
 	// endregion
 
+	// region ==================== HomeContract ====================
+
+	override fun loadImageTwoFromLink() {
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		childFragmentManager.beginTransaction()
+			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
+			.commitNow()
+	}
+
+	override fun loadImageOneFromLink() {
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
+		childFragmentManager.beginTransaction()
+			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
+			.commitNow()
+	}
+
+
+	override fun setImageOneFromGallery() {
+		// Создаем Intent для открытия галереи
+		val intent = Intent()
+		intent.type = "image/*"
+		intent.action = Intent.ACTION_GET_CONTENT
+
+		// Запускаем Intent и ждем результат
+		startActivityForResult(
+			Intent.createChooser(intent, "Select Picture"),
+			PICK_IMAGE_ONE
+		)
+	}
+
+	override fun setImageTwoFromGallery() {
+		// Создаем Intent для открытия галереи
+		val intent = Intent()
+		intent.type = "image/*"
+		intent.action = Intent.ACTION_GET_CONTENT
+
+		// Запускаем Intent и ждем результат
+		startActivityForResult(
+			Intent.createChooser(intent, "Select Picture"),
+			PICK_IMAGE_TWO
+		)
+	}
+
+
+
+	// endregion
+
 	// region ==================== Internal ====================
 
 	private fun initUI(view: View) {
@@ -86,47 +133,6 @@ class HomeFragment : Fragment(), HomeContract {
 			btnGalleryOne.setOnClickListener { setImageOneFromGallery() }
 			btnGalleryTwo.setOnClickListener { setImageTwoFromGallery() }
 		}
-	}
-
-	private fun loadImageTwoFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
-		childFragmentManager.beginTransaction()
-			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
-			.commitNow()
-	}
-
-	private fun loadImageOneFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null)
-		childFragmentManager.beginTransaction()
-			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
-			.commitNow()
-	}
-
-
-	private fun setImageOneFromGallery() {
-		// Создаем Intent для открытия галереи
-		val intent = Intent()
-		intent.type = "image/*"
-		intent.action = Intent.ACTION_GET_CONTENT
-
-		// Запускаем Intent и ждем результат
-		startActivityForResult(
-			Intent.createChooser(intent, "Select Picture"),
-			PICK_IMAGE_ONE
-		)
-	}
-
-	private fun setImageTwoFromGallery() {
-		// Создаем Intent для открытия галереи
-		val intent = Intent()
-		intent.type = "image/*"
-		intent.action = Intent.ACTION_GET_CONTENT
-
-		// Запускаем Intent и ждем результат
-		startActivityForResult(
-			Intent.createChooser(intent, "Select Picture"),
-			PICK_IMAGE_TWO
-		)
 	}
 
 	// endregion
