@@ -13,7 +13,7 @@
 	<!--end region-->
 
 	<!--choose image from link region-->
-	<string name="choose_image_from_link_title">Найти изображение по ссылке</string>
+	<string name="choose_image_from_link_title">Поиск по ссылке</string>
 	<string name="choose_image_from_link_put_your_link_here_msg">Вставьте ниже вашу ссылку, а я попробую найти изображение. Убедитесь, что ссылка действительно ведет на изображение.</string>
 	<string name="choose_image_from_link_text_edit_hint">Ссылка на ваше изображение</string>
 	<string name="choose_image_from_link_wait_your_link">Ожидание ввода ссылки.\nВаше изображение появится здесь</string>

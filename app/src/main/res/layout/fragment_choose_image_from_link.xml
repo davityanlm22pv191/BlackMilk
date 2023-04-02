@@ -41,25 +41,44 @@
 		android:text="@string/choose_image_from_link_put_your_link_here_msg"
 		app:layout_constraintTop_toBottomOf="@id/llToolbar" />
 
-	<EditText
-		android:id="@+id/editTextLink"
-		style="@style/S16Black26"
+	<FrameLayout
+		android:id="@+id/flEditTextLink"
 		android:layout_width="match_parent"
 		android:layout_height="36dp"
 		android:layout_margin="16dp"
-		android:background="@drawable/background_link_text_edit"
-		android:hint="@string/choose_image_from_link_text_edit_hint"
-		android:inputType="text"
-		android:maxLines="1"
-		android:paddingStart="16dp"
-		app:layout_constraintTop_toBottomOf="@id/tvPutLinkHereMsg" />
+		app:layout_constraintTop_toBottomOf="@id/tvPutLinkHereMsg">
+
+		<EditText
+			android:id="@+id/editTextLink"
+			style="@style/S16Black26"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@drawable/background_link_text_edit"
+			android:hint="@string/choose_image_from_link_text_edit_hint"
+			android:inputType="text"
+			android:maxLines="1"
+			android:paddingStart="16dp" />
+
+		<ImageView
+			android:id="@+id/btnEnter"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|center_vertical"
+			android:layout_marginEnd="4dp"
+			android:background="@color/white"
+			android:paddingVertical="4dp"
+			android:paddingStart="4dp"
+			android:paddingEnd="8dp"
+			android:src="@drawable/ic_enter" />
+
+	</FrameLayout>
 
 	<FrameLayout
 		android:id="@+id/flImageFromLink"
 		android:layout_width="match_parent"
 		android:layout_height="380dp"
 		android:layout_margin="16dp"
-		app:layout_constraintTop_toBottomOf="@id/editTextLink">
+		app:layout_constraintTop_toBottomOf="@id/flEditTextLink">
 
 		<TextView
 			android:id="@+id/tvIsYourImageMsg"

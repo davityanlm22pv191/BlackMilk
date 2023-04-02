@@ -61,16 +61,25 @@ class ChooseImageFromLinkFragment(
 	//region ==================== Internal ====================
 
 	private fun initUI(view: View) {
-		onBackClicked()
-		view.setOnClickListener(null)
-		view.findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+		view.apply {
+			setupEditText(this)
 
-		if (link != null && bitmapImage != null) {
-			setViewWithParameters(view)
-		} else {
-			setViewWithoutParameters(view)
+			if (link != null && bitmapImage != null) {
+				setViewWithParameters(this)
+			} else {
+				setViewWithoutParameters(this)
+			}
+
+			onBackClicked()
+			setOnClickListener(null)
+			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
 		}
+	}
 
+	private fun setupEditText(view: View) {
+		view.findViewById<EditText>(R.id.editTextLink).apply {
+
+		}
 	}
 
 	private fun onBackClicked() {
