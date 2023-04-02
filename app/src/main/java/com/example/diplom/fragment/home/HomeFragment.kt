@@ -71,20 +71,12 @@ class HomeFragment : Fragment(), HomeContract {
 
 	// region ==================== HomeContract ====================
 
-	override fun loadImageTwoFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, PICK_IMAGE_TWO)
+	override fun setImageFromLink(imageNumber: Int) {
+		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, imageNumber)
 		childFragmentManager.beginTransaction()
 			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
 			.commitNow()
 	}
-
-	override fun loadImageOneFromLink() {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, PICK_IMAGE_ONE)
-		childFragmentManager.beginTransaction()
-			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
-			.commitNow()
-	}
-
 
 	override fun setImageOneFromGallery() {
 		// Создаем Intent для открытия галереи
@@ -127,8 +119,8 @@ class HomeFragment : Fragment(), HomeContract {
 			val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
 			val btnLinkOne = findViewById<TextView>(R.id.btnChooseOneFromLink)
 			val btnLinkTwo = findViewById<TextView>(R.id.btnChooseTwoFromLink)
-			btnLinkOne.setOnClickListener { loadImageOneFromLink() }
-			btnLinkTwo.setOnClickListener { loadImageTwoFromLink() }
+			btnLinkOne.setOnClickListener { setImageFromLink(PICK_IMAGE_ONE) }
+			btnLinkTwo.setOnClickListener { setImageFromLink(PICK_IMAGE_TWO) }
 			btnGalleryOne.setOnClickListener { setImageOneFromGallery() }
 			btnGalleryTwo.setOnClickListener { setImageTwoFromGallery() }
 		}
