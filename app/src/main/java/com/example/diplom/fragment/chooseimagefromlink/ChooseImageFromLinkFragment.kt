@@ -1,11 +1,13 @@
 package com.example.diplom.fragment.chooseimagefromlink
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -91,6 +93,7 @@ class ChooseImageFromLinkFragment(
 			val imageView = findViewById<ImageView>(R.id.ivImageFromLink)
 			val link = getEditTextString(this)
 			if (link.isNotBlank()) {
+				Glide.with(this).clear(imageView)
 				Glide.with(this)
 					.load(link)
 					.listener(object : RequestListener<Drawable> {
@@ -117,10 +120,17 @@ class ChooseImageFromLinkFragment(
 					})
 					.into(imageView)
 			} else {
+				Glide.with(this).clear(imageView)
 				findViewById<TextView>(R.id.tvImageFromLinkStateInfo)
 					.text = context.getString(R.string.choose_image_from_link_wait_your_link)
 			}
 		}
+		val inputMethodManager =
+			requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+		inputMethodManager.hideSoftInputFromWindow(
+			view.findViewById<EditText>(R.id.editTextLink)?.windowToken,
+			0
+		)
 	}
 
 	// endregion
@@ -141,16 +151,18 @@ class ChooseImageFromLinkFragment(
 			setOnClickListener(null)
 			findViewById<ImageView>(R.id.btnEnter).setOnClickListener { onEnterClicked(this) }
 			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+			findViewById<TextView>(R.id.btnClearLink).setOnClickListener {
+				clearTextEdit(findViewById(R.id.editTextLink))
+				onEnterClicked(this)
+			}
 		}
 	}
 
 	private fun setViewWithoutParameters(view: View) {
+		clearTextEdit(view.findViewById(R.id.editTextLink))
 		view.findViewById<ImageView>(R.id.tvImageFromLinkStateInfo).isVisible = true
 		view.findViewById<LinearLayout>(R.id.llAgreeOrClearButtons).isVisible = false
 		view.findViewById<TextView>(R.id.tvIsYourImageMsg).isVisible = false
-		view.findViewById<EditText>(R.id.editTextLink).apply {
-			setOnClickListener { clearTextEdit(this) }
-		}
 	}
 
 	private fun setViewWithParameters(view: View) {
