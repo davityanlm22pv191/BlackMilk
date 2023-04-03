@@ -21,22 +21,29 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.diplom.R
+import com.example.diplom.fragment.home.HomeFragment
+import com.example.diplom.fragment.home.callback.HomeCallback
 
 class ChooseImageFromLinkFragment(
+	parentFragment: HomeFragment,
 	private val bitmapImage: Bitmap?,
 	private val link: String?,
 	private val imageNumber: Int,
 ) : Fragment(R.layout.fragment_choose_image_from_link),
 	ChooseImageFromLinkContract {
 
+	private var lastCorrectLink: String? = null
+
 	companion object {
 		fun newInstance(
+			parentFragment: HomeFragment,
 			bitmapImage: Bitmap?,
 			link: String?,
 			imageNumber: Int
 		): ChooseImageFromLinkFragment {
 			val args = Bundle()
-			val fragment = ChooseImageFromLinkFragment(bitmapImage, link, imageNumber)
+			val fragment =
+				ChooseImageFromLinkFragment(parentFragment, bitmapImage, link, imageNumber)
 			fragment.arguments = args
 			return fragment
 		}
@@ -79,6 +86,22 @@ class ChooseImageFromLinkFragment(
 			})
 	}
 
+	override fun onAgreeClicked(view: View) {
+		val callBack = parentFragment as? HomeCallback
+
+		val imageView = view.findViewById<ImageView>(R.id.ivImageFromLink)
+		imageView.setBackgroundResource(0)
+		imageView.isDrawingCacheEnabled = true
+		val bitmapSrc = Bitmap.createBitmap(imageView.drawingCache)
+		imageView.isDrawingCacheEnabled = false
+
+		bitmapSrc?.let { bitmap ->
+			lastCorrectLink?.let { link ->
+				callBack?.onDataReceived(bitmap, link, imageNumber)
+			}
+		}
+	}
+
 	override fun setupToolbar(view: View) {
 		view.findViewById<TextView>(R.id.tvToolbarTitle).text =
 			context?.getString(R.string.choose_image_from_link_title, imageNumber.toString())
@@ -104,6 +127,7 @@ class ChooseImageFromLinkFragment(
 							isFirstResource: Boolean
 						): Boolean {
 							setViewLoadError(view)
+							lastCorrectLink = null
 							return false
 						}
 
@@ -115,11 +139,13 @@ class ChooseImageFromLinkFragment(
 							isFirstResource: Boolean
 						): Boolean {
 							setViewLoadSuccess(view)
+							lastCorrectLink = link
 							return false
 						}
 					})
 					.into(imageView)
 			} else {
+				lastCorrectLink = null
 				Glide.with(this).clear(imageView)
 				findViewById<TextView>(R.id.tvImageFromLinkStateInfo)
 					.text = context.getString(R.string.choose_image_from_link_wait_your_link)
@@ -155,6 +181,7 @@ class ChooseImageFromLinkFragment(
 				clearTextEdit(findViewById(R.id.editTextLink))
 				onEnterClicked(this)
 			}
+			findViewById<TextView>(R.id.btnAgree).setOnClickListener { onAgreeClicked(this) }
 		}
 	}
 

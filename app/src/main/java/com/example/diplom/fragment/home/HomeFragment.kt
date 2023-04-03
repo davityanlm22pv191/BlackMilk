@@ -14,11 +14,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
 import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
+import com.example.diplom.fragment.home.callback.HomeCallback
+import com.example.diplom.fragment.home.model.CurrentImage
 
-class HomeFragment : Fragment(), HomeContract {
+class HomeFragment : Fragment(), HomeContract, HomeCallback {
 
-	private var lastSelectedImageOneBitmap: Bitmap? = null
-	private var lastSelectedImageTwoBitmap: Bitmap? = null
+	private var imageOne: CurrentImage = CurrentImage(null, null)
+	private var imageTwo: CurrentImage = CurrentImage(null, null)
 
 	companion object {
 		const val LOAD_IMAGE_FROM_LINK_FRAGMENT = "LOAD_IMAGE_FROM_LINK_FRAGMENT"
@@ -56,11 +58,11 @@ class HomeFragment : Fragment(), HomeContract {
 
 			if (requestCode == PICK_IMAGE_ONE && resultCode == AppCompatActivity.RESULT_OK) {
 				view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
-				lastSelectedImageOneBitmap = bitmap
+				imageOne.bitmap = bitmap
 				view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(bitmap)
 			} else if (requestCode == PICK_IMAGE_TWO && resultCode == AppCompatActivity.RESULT_OK) {
 				view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
-				lastSelectedImageTwoBitmap = bitmap
+				imageTwo.bitmap = bitmap
 				view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)?.setImageBitmap(bitmap)
 			} else {
 			}
@@ -69,10 +71,36 @@ class HomeFragment : Fragment(), HomeContract {
 
 	// endregion
 
+	// region ==================== HomeCallback ====================
+
+	override fun onDataReceived(bitmapImage: Bitmap, link: String, imageNumber: Int) {
+		when (imageNumber) {
+			PICK_IMAGE_ONE -> {
+				imageOne.bitmap = bitmapImage
+				this.view?.findViewById<ImageView>(R.id.ivCurrentImageOne)
+					?.setImageBitmap(imageOne.bitmap)
+				imageOne.link = link
+			}
+			PICK_IMAGE_TWO -> {
+				imageTwo.bitmap = bitmapImage
+				this.view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)
+					?.setImageBitmap(imageTwo.bitmap)
+				imageTwo.link = link
+			}
+		}
+		val fragment = childFragmentManager.findFragmentByTag(LOAD_IMAGE_FROM_LINK_FRAGMENT)
+		if (fragment != null) {
+			childFragmentManager.beginTransaction().remove(fragment).commit()
+		}
+
+	}
+
+	// endregion
+
 	// region ==================== HomeContract ====================
 
-	override fun setImageFromLink(imageNumber: Int) {
-		val fragment = ChooseImageFromLinkFragment.newInstance(null, null, imageNumber)
+	override fun navigateToChooseImageFromLink(imageNumber: Int) {
+		val fragment = ChooseImageFromLinkFragment.newInstance(this, null, null, imageNumber)
 		childFragmentManager.beginTransaction()
 			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
 			.commitNow()
@@ -119,8 +147,8 @@ class HomeFragment : Fragment(), HomeContract {
 			val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
 			val btnLinkOne = findViewById<TextView>(R.id.btnChooseOneFromLink)
 			val btnLinkTwo = findViewById<TextView>(R.id.btnChooseTwoFromLink)
-			btnLinkOne.setOnClickListener { setImageFromLink(PICK_IMAGE_ONE) }
-			btnLinkTwo.setOnClickListener { setImageFromLink(PICK_IMAGE_TWO) }
+			btnLinkOne.setOnClickListener { navigateToChooseImageFromLink(PICK_IMAGE_ONE) }
+			btnLinkTwo.setOnClickListener { navigateToChooseImageFromLink(PICK_IMAGE_TWO) }
 			btnGalleryOne.setOnClickListener { setImageOneFromGallery() }
 			btnGalleryTwo.setOnClickListener { setImageTwoFromGallery() }
 		}

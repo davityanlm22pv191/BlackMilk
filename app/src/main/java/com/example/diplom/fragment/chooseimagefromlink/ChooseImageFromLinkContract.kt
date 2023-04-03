@@ -17,4 +17,5 @@ interface ChooseImageFromLinkContract {
 
 	fun setupToolbar(view: View)
 
+	fun onAgreeClicked(view: View)
 }
