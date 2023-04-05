@@ -76,12 +76,14 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 	override fun onDataReceived(bitmapImage: Bitmap, link: String, imageNumber: Int) {
 		when (imageNumber) {
 			PICK_IMAGE_ONE -> {
+				this.view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
 				imageOne.bitmap = bitmapImage
 				this.view?.findViewById<ImageView>(R.id.ivCurrentImageOne)
 					?.setImageBitmap(imageOne.bitmap)
 				imageOne.link = link
 			}
 			PICK_IMAGE_TWO -> {
+				this.view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
 				imageTwo.bitmap = bitmapImage
 				this.view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)
 					?.setImageBitmap(imageTwo.bitmap)
@@ -100,7 +102,22 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 	// region ==================== HomeContract ====================
 
 	override fun navigateToChooseImageFromLink(imageNumber: Int) {
-		val fragment = ChooseImageFromLinkFragment.newInstance(this, null, null, imageNumber)
+		val fragment: Fragment = if (imageNumber == PICK_IMAGE_ONE) {
+			ChooseImageFromLinkFragment.newInstance(
+				this,
+				imageOne.bitmap,
+				imageOne.link,
+				imageNumber
+			)
+		} else {
+			ChooseImageFromLinkFragment.newInstance(
+				this,
+				imageTwo.bitmap,
+				imageTwo.link,
+				imageNumber
+			)
+		}
+
 		childFragmentManager.beginTransaction()
 			.add(R.id.rootElement, fragment, LOAD_IMAGE_FROM_LINK_FRAGMENT)
 			.commitNow()

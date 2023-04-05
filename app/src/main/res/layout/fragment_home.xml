@@ -69,11 +69,11 @@
 			android:text="@string/main_screen_image_not_selected_msg" />
 
 		<ImageView
-			android:padding="2dp"
 			android:id="@+id/ivCurrentImageOne"
 			android:layout_width="match_parent"
 			android:layout_height="150dp"
 			android:background="@drawable/background_current_image"
+			android:padding="2dp"
 			android:scaleType="fitCenter" />
 
 	</FrameLayout>
@@ -96,11 +96,11 @@
 			android:text="@string/main_screen_image_not_selected_msg" />
 
 		<ImageView
-			android:padding="2dp"
 			android:id="@+id/ivCurrentImageTwo"
 			android:layout_width="150dp"
 			android:layout_height="150dp"
 			android:background="@drawable/background_current_image"
+			android:padding="2dp"
 			android:scaleType="fitCenter" />
 
 	</FrameLayout>
@@ -213,5 +213,32 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/llChooseSourceList" />
+
+	<com.google.android.material.switchmaterial.SwitchMaterial
+		android:id="@+id/switchShowCompare"
+		style="@style/S18White"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="16dp"
+		android:layout_marginTop="16dp"
+		android:checked="false"
+		android:text="@string/main_screen_show_compare_process"
+		app:layout_constraintTop_toBottomOf="@id/viewHorizontalSeparator"
+		app:thumbTint="@color/purple_500"
+		app:trackTint="@color/purple_200" />
+
+	<TextView
+		android:id="@+id/btnCompare"
+		style="@style/S20White"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="16dp"
+		android:layout_marginBottom="16dp"
+		android:background="@drawable/background_compare_button"
+		android:gravity="center_horizontal"
+		android:paddingVertical="16dp"
+		android:text="@string/main_screen_button_compare_images"
+		android:visibility="gone"
+		app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
