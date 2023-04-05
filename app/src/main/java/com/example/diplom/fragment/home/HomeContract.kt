@@ -1,7 +1,5 @@
 package com.example.diplom.fragment.home
 
-import android.graphics.Bitmap
-
 interface HomeContract {
 
 	fun navigateToChooseImageFromLink(imageNumber: Int)
@@ -9,4 +7,8 @@ interface HomeContract {
 	fun setImageOneFromGallery()
 
 	fun setImageTwoFromGallery()
+
+	fun isAllImageLoaded(): Boolean
+
+	fun checkToReadyCompare()
 }

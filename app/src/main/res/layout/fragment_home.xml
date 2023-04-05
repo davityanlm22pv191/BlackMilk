@@ -18,6 +18,16 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
+	<ImageView
+		android:id="@+id/ivResultOfCompare"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toBottomOf="@id/flCurrentImageOne"
+		app:layout_constraintEnd_toStartOf="@id/flCurrentImageTwo"
+		app:layout_constraintStart_toEndOf="@id/flCurrentImageOne"
+		app:layout_constraintTop_toTopOf="@id/flCurrentImageOne" />
+
+
 	<View
 		android:id="@+id/viewVerticalSeparator"
 		android:layout_width="2dp"
@@ -223,6 +233,7 @@
 		android:layout_marginTop="16dp"
 		android:checked="false"
 		android:text="@string/main_screen_show_compare_process"
+		android:visibility="gone"
 		app:layout_constraintTop_toBottomOf="@id/viewHorizontalSeparator"
 		app:thumbTint="@color/purple_500"
 		app:trackTint="@color/purple_200" />
@@ -235,10 +246,10 @@
 		android:layout_marginHorizontal="16dp"
 		android:layout_marginBottom="16dp"
 		android:background="@drawable/background_compare_button"
+		android:enabled="false"
 		android:gravity="center_horizontal"
 		android:paddingVertical="16dp"
 		android:text="@string/main_screen_button_compare_images"
-		android:visibility="gone"
 		app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

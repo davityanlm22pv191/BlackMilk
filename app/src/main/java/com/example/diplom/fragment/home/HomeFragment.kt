@@ -16,6 +16,7 @@ import com.example.diplom.R
 import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
 import com.example.diplom.fragment.home.callback.HomeCallback
 import com.example.diplom.fragment.home.model.CurrentImage
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class HomeFragment : Fragment(), HomeContract, HomeCallback {
 
@@ -56,17 +57,21 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 			val bitmap =
 				MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
 
-			if (requestCode == PICK_IMAGE_ONE && resultCode == AppCompatActivity.RESULT_OK) {
-				view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
-				imageOne.bitmap = bitmap
-				view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(bitmap)
-			} else if (requestCode == PICK_IMAGE_TWO && resultCode == AppCompatActivity.RESULT_OK) {
-				view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
-				imageTwo.bitmap = bitmap
-				view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)?.setImageBitmap(bitmap)
-			} else {
+			when {
+				requestCode == PICK_IMAGE_ONE && resultCode == AppCompatActivity.RESULT_OK -> {
+					view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
+					imageOne.bitmap = bitmap
+					view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(bitmap)
+				}
+				requestCode == PICK_IMAGE_TWO && resultCode == AppCompatActivity.RESULT_OK -> {
+					view?.findViewById<TextView>(R.id.tvImageTwoNotSelectedMsg)?.isVisible = false
+					imageTwo.bitmap = bitmap
+					view?.findViewById<ImageView>(R.id.ivCurrentImageTwo)?.setImageBitmap(bitmap)
+				}
+				else -> {}
 			}
 		}
+		checkToReadyCompare()
 	}
 
 	// endregion
@@ -94,7 +99,7 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 		if (fragment != null) {
 			childFragmentManager.beginTransaction().remove(fragment).commit()
 		}
-
+		checkToReadyCompare()
 	}
 
 	// endregion
@@ -149,6 +154,19 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 		)
 	}
 
+	override fun isAllImageLoaded(): Boolean {
+		if (imageOne.bitmap != null && imageTwo.bitmap != null) {
+			return true
+		}
+		return false
+	}
+
+	override fun checkToReadyCompare() {
+		if (isAllImageLoaded()) {
+			this.view?.findViewById<TextView>(R.id.btnCompare)?.isEnabled = true
+			this.view?.findViewById<SwitchMaterial>(R.id.switchShowCompare)?.isVisible = true
+		}
+	}
 
 	// endregion
 
