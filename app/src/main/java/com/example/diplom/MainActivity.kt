@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_main)
 		val homeFragment = HomeFragment()
 		supportFragmentManager.beginTransaction()
-			.replace(R.id.rootElement, homeFragment)
+			.replace(R.id.rootElementMain, homeFragment)
 			.commit()
 	}
 }

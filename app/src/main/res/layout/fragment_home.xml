@@ -27,7 +27,6 @@
 		app:layout_constraintStart_toEndOf="@id/flCurrentImageOne"
 		app:layout_constraintTop_toTopOf="@id/flCurrentImageOne" />
 
-
 	<View
 		android:id="@+id/viewVerticalSeparator"
 		android:layout_width="2dp"

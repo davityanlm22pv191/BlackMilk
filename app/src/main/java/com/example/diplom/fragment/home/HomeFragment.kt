@@ -13,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
-import com.example.diplom.entity.PerceptualHashCompareImages
 import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
 import com.example.diplom.fragment.home.callback.HomeCallback
 import com.example.diplom.fragment.home.model.CurrentImage
+import com.example.diplom.fragment.showcompareprocess.ShowCompareProcessFragment
+import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class HomeFragment : Fragment(), HomeContract, HomeCallback {
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 
 	companion object {
 		const val LOAD_IMAGE_FROM_LINK_FRAGMENT = "LOAD_IMAGE_FROM_LINK_FRAGMENT"
+		const val SHOW_COMPARE_PROCESS = "SHOW_COMPARE_PROCESS"
 		private const val PICK_IMAGE_ONE = 1
 		private const val PICK_IMAGE_TWO = 2
 	}
@@ -107,6 +109,25 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 
 	// region ==================== HomeContract ====================
 
+	override fun onBtnCompareClicked() {
+		if (imageOne.bitmap != null && imageTwo.bitmap != null) {
+			val imageOneBitmap: Bitmap = imageOne.bitmap!!
+			val imageTwoBitmap: Bitmap = imageTwo.bitmap!!
+
+			val fragment: Fragment = ShowCompareProcessFragment.newInstance(
+				this,
+				ShowCompareProcessParams(
+					imageOneBitmap,
+					imageTwoBitmap
+				)
+			)
+
+			childFragmentManager.beginTransaction()
+				.add(R.id.rootElement, fragment, SHOW_COMPARE_PROCESS)
+				.commitNow()
+		}
+	}
+
 	override fun navigateToChooseImageFromLink(imageNumber: Int) {
 		val fragment: Fragment = if (imageNumber == PICK_IMAGE_ONE) {
 			ChooseImageFromLinkFragment.newInstance(
@@ -169,9 +190,6 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 		}
 	}
 
-	override fun onBtnCompareClicked() {
-
-	}
 
 	// endregion
 
