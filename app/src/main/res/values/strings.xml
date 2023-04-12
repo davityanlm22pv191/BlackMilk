@@ -25,4 +25,9 @@
 	<string name="choose_image_from_link_load_error_msg">Не удалось найти изображение по данной ссылке. Пожалуйста, проверьте вашу ссылку</string>
 	<!--end region-->
 
+	<!--show compare process region-->
+	<string name="show_compare_process_title">Демонстрация сравнения</string>
+	<string name="show_compare_process_close_button_title">Выйти</string>
+	<!--end region-->
+
 </resources>
