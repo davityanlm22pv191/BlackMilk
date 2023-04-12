@@ -1,5 +1,6 @@
 package com.example.diplom.fragment.showcompareprocess
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,23 +9,36 @@ import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
-import com.example.diplom.fragment.home.HomeFragment
+import com.example.diplom.entity.PerceptualHashCompareImages
 import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
 
 class ShowCompareProcessFragment(
-	parentFragment: HomeFragment,
 	private val showCompareProcessParams: ShowCompareProcessParams,
 ) : Fragment(R.layout.fragment_show_compare_proccess), ShowCompareProcessContract {
+
+	/** Init class for alg process */
+	private val perceptualHashCompareImages = PerceptualHashCompareImages()
+
+	/** Step first */
+	private val srcImageOne: Bitmap = showCompareProcessParams.imageBitmapOne
+	private val srcImageTwo: Bitmap = showCompareProcessParams.imageBitmapTwo
+
+	/** Step second */
+	private var scaledImageOne: Bitmap? = null
+	private var scaledImageTwo: Bitmap? = null
+
+	/** Step third */
+	private var grayScaleImageOne: Bitmap? = null
+	private var grayScaleImageTwo: Bitmap? = null
 
 	//region ==================== Object creation ====================
 
 	companion object {
 		fun newInstance(
-			parentFragment: HomeFragment,
 			showCompareProcessParams: ShowCompareProcessParams,
 		): ShowCompareProcessFragment {
 			val args = Bundle()
-			val fragment = ShowCompareProcessFragment(parentFragment, showCompareProcessParams)
+			val fragment = ShowCompareProcessFragment(showCompareProcessParams)
 			fragment.arguments = args
 			return fragment
 		}
@@ -71,10 +85,42 @@ class ShowCompareProcessFragment(
 
 	private fun initUI(view: View) {
 		view.apply {
+			setupBackActions(this)
+
+			/** Step first */
 			setImagesSources(this)
-			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
-			onBackClicked()
+
+			/** Step second */
+			setScaledImages(this)
+
+			/** Step third */
+			setGrayScaleImages(this)
 		}
+	}
+
+	private fun setGrayScaleImages(view: View) {
+		scaledImageOne?.let {
+			grayScaleImageOne = perceptualHashCompareImages.getGrayScaleBitmap(it)
+		}
+		scaledImageTwo?.let {
+			grayScaleImageTwo = perceptualHashCompareImages.getGrayScaleBitmap(it)
+		}
+		view.findViewById<ImageView>(R.id.ivGrayScaleImageOne).setImageBitmap(grayScaleImageOne)
+		view.findViewById<ImageView>(R.id.ivGrayScaleImageTwo).setImageBitmap(grayScaleImageTwo)
+	}
+
+	private fun setScaledImages(view: View) {
+		scaledImageOne = perceptualHashCompareImages.getScaledBitmap(srcImageOne)
+		scaledImageTwo = perceptualHashCompareImages.getScaledBitmap(srcImageTwo)
+		view.findViewById<ImageView>(R.id.ivScaledImageOne)
+			.setImageBitmap(scaledImageOne)
+		view.findViewById<ImageView>(R.id.ivScaledImageTwo)
+			.setImageBitmap(scaledImageTwo)
+	}
+
+	private fun setupBackActions(view: View) {
+		view.findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+		onBackClicked()
 	}
 
 	private fun setImagesSources(view: View) {
