@@ -1,3 +1,7 @@
 package com.example.diplom.fragment.showcompareprocess
 
-interface ShowCompareProcessContract {}
+interface ShowCompareProcessContract {
+	fun close()
+
+	fun onBackClicked()
+}

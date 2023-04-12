@@ -29,7 +29,7 @@
 	<string name="show_compare_process_title">Демонстрация сравнения</string>
 	<string name="show_compare_process_source_image_step_first">1. Исходник</string>
 	<string name="show_compare_process_scaled_image_step_second">2. Уменьшенное изображение</string>
-	<string name="show_compare_process_to_gray_scale_step_third">3. В оттенки серого</string>
+	<string name="show_compare_process_to_gray_scale_step_third">3. В оттенках серого</string>
 	<string name="show_compare_process_close_button_title">Выйти</string>
 	<!--end region-->
 

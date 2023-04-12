@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
 import com.example.diplom.fragment.home.HomeFragment
@@ -11,8 +13,8 @@ import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessPa
 
 class ShowCompareProcessFragment(
 	parentFragment: HomeFragment,
-	showCompareProcessParams: ShowCompareProcessParams,
-) : Fragment(R.layout.fragment_show_compare_proccess) {
+	private val showCompareProcessParams: ShowCompareProcessParams,
+) : Fragment(R.layout.fragment_show_compare_proccess), ShowCompareProcessContract {
 
 	//region ==================== Object creation ====================
 
@@ -26,6 +28,26 @@ class ShowCompareProcessFragment(
 			fragment.arguments = args
 			return fragment
 		}
+	}
+
+	// endregion
+
+	// region ==================== ShowCompareProcessContract ====================
+
+	override fun close() {
+		parentFragmentManager.beginTransaction()
+			.remove(this)
+			.commit()
+	}
+
+	override fun onBackClicked() {
+		requireActivity().onBackPressedDispatcher.addCallback(
+			viewLifecycleOwner,
+			object : OnBackPressedCallback(true) {
+				override fun handleOnBackPressed() {
+					close()
+				}
+			})
 	}
 
 	// endregion
@@ -48,7 +70,18 @@ class ShowCompareProcessFragment(
 	//region ==================== Internal ====================
 
 	private fun initUI(view: View) {
-		view.apply { }
+		view.apply {
+			setImagesSources(this)
+			findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+			onBackClicked()
+		}
+	}
+
+	private fun setImagesSources(view: View) {
+		view.findViewById<ImageView>(R.id.ivSourceImageOne)
+			.setImageBitmap(showCompareProcessParams.imageBitmapOne)
+		view.findViewById<ImageView>(R.id.ivSourceImageTwo)
+			.setImageBitmap(showCompareProcessParams.imageBitmapTwo)
 	}
 
 	// endregion
