@@ -170,10 +170,7 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 	}
 
 	override fun onBtnCompareClicked() {
-		val compare = PerceptualHashCompareImages()
-		this.imageOne.bitmap?.let {
-			this.view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(compare.getScaledBitmap(it))
-		}
+
 	}
 
 	// endregion

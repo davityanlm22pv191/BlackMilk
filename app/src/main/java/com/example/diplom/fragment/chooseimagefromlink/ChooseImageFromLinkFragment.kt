@@ -34,6 +34,8 @@ class ChooseImageFromLinkFragment(
 
 	private var lastCorrectLink: String? = null
 
+	// region ==================== Object creation ====================
+
 	companion object {
 		fun newInstance(
 			parentFragment: HomeFragment,
@@ -49,7 +51,9 @@ class ChooseImageFromLinkFragment(
 		}
 	}
 
-	//region ==================== Lifecycle ====================
+	// endregion
+
+	// region ==================== Lifecycle ====================
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -64,7 +68,7 @@ class ChooseImageFromLinkFragment(
 
 	// endregion
 
-	//region ==================== ChooseImageFromLinkContract ====================
+	// region ==================== ChooseImageFromLinkContract ====================
 
 	override fun clearTextEdit(editText: EditText) {
 		editText.text.clear()
