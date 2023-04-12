@@ -1,4 +1,4 @@
-package com.example.diplom.fragment.showcompareproccess.model
+package com.example.diplom.fragment.showcompareprocess.model
 
 import android.graphics.Bitmap
 

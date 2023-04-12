@@ -1,9 +1,9 @@
-package com.example.diplom.fragment.showcompareproccess
+package com.example.diplom.fragment.showcompareprocess
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.diplom.fragment.home.HomeFragment
-import com.example.diplom.fragment.showcompareproccess.model.ShowCompareProcessParams
+import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
 
 class ShowCompareProcessFragment(
 	parentFragment: HomeFragment,

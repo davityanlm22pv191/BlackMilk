@@ -3,26 +3,23 @@
 
 	<item android:state_enabled="false">
 		<shape android:shape="rectangle">
-			<solid android:color="@color/greyB8"/>
-			<corners android:radius="12dp"/>
-			<stroke android:width="1dp" android:color="@color/greyF8"/>
-		</shape>
-	</item>
-
-	<item android:state_enabled="true">
-		<shape android:shape="rectangle">
-			<solid android:color="@color/purple_500"/>
-			<corners android:radius="12dp"/>
-
+			<solid android:color="@color/greyB8" />
+			<corners android:radius="12dp" />
+			<stroke android:width="1dp" android:color="@color/greyF8" />
 		</shape>
 	</item>
 
 	<item android:state_pressed="true">
 		<shape android:shape="rectangle">
-			<solid android:color="@color/pinkFF"/>
-			<corners android:radius="20dp"/>
-			<stroke android:width="1dp" android:color="@color/greyF8"/>
+			<solid android:color="@color/pinkFF" />
+			<corners android:radius="20dp" />
 		</shape>
 	</item>
 
+	<item android:state_pressed="false">
+		<shape android:shape="rectangle">
+			<solid android:color="@color/purple_500" />
+			<corners android:radius="20dp" />
+		</shape>
+	</item>
 </selector>
