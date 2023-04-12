@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
+import com.example.diplom.entity.PerceptualHashCompareImages
 import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
 import com.example.diplom.fragment.home.callback.HomeCallback
 import com.example.diplom.fragment.home.model.CurrentImage
@@ -168,6 +169,13 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 		}
 	}
 
+	override fun onBtnCompareClicked() {
+		val compare = PerceptualHashCompareImages()
+		this.imageOne.bitmap?.let {
+			this.view?.findViewById<ImageView>(R.id.ivCurrentImageOne)?.setImageBitmap(compare.getScaledBitmap(it))
+		}
+	}
+
 	// endregion
 
 	// region ==================== Internal ====================
@@ -182,10 +190,12 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 			val btnGalleryTwo = findViewById<TextView>(R.id.btnChooseTwoFromGallery)
 			val btnLinkOne = findViewById<TextView>(R.id.btnChooseOneFromLink)
 			val btnLinkTwo = findViewById<TextView>(R.id.btnChooseTwoFromLink)
+			val btnCompare = findViewById<TextView>(R.id.btnCompare)
 			btnLinkOne.setOnClickListener { navigateToChooseImageFromLink(PICK_IMAGE_ONE) }
 			btnLinkTwo.setOnClickListener { navigateToChooseImageFromLink(PICK_IMAGE_TWO) }
 			btnGalleryOne.setOnClickListener { setImageOneFromGallery() }
 			btnGalleryTwo.setOnClickListener { setImageTwoFromGallery() }
+			btnCompare.setOnClickListener { onBtnCompareClicked() }
 		}
 	}
 

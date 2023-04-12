@@ -11,4 +11,6 @@ interface HomeContract {
 	fun isAllImageLoaded(): Boolean
 
 	fun checkToReadyCompare()
+
+	fun onBtnCompareClicked()
 }
