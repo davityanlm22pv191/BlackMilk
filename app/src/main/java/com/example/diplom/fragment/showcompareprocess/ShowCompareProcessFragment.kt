@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
@@ -95,6 +96,42 @@ class ShowCompareProcessFragment(
 
 			/** Step third */
 			setGrayScaleImages(this)
+
+			/** Step Fourth */
+			setPixelsInfo(this)
+		}
+	}
+
+	private fun setPixelsInfo(view: View) {
+		view.apply {
+			grayScaleImageOne?.let {
+				findViewById<TextView>(R.id.tvPixelCountImageOne).text = resources.getString(
+					R.string.show_compare_process_pixels_info_pixels_count,
+					perceptualHashCompareImages.getPixelCount(it).toString()
+				)
+				findViewById<TextView>(R.id.tvPixelsSumImageOne).text = resources.getString(
+					R.string.show_compare_process_pixels_info_pixels_sum,
+					perceptualHashCompareImages.getPixelSum(it).toString()
+				)
+				findViewById<TextView>(R.id.tvAveragePixelImageOne).text = resources.getString(
+					R.string.show_compare_process_pixels_info_average_pixel,
+					perceptualHashCompareImages.getAverageValueOfPixels(it).toString()
+				)
+			}
+			grayScaleImageTwo?.let {
+				findViewById<TextView>(R.id.tvPixelCountImageTwo).text = resources.getString(
+					R.string.show_compare_process_pixels_info_pixels_count,
+					perceptualHashCompareImages.getPixelCount(it).toString()
+				)
+				findViewById<TextView>(R.id.tvPixelsSumImageTwo).text = resources.getString(
+					R.string.show_compare_process_pixels_info_pixels_sum,
+					perceptualHashCompareImages.getPixelSum(it).toString()
+				)
+				findViewById<TextView>(R.id.tvAveragePixelImageTwo).text = resources.getString(
+					R.string.show_compare_process_pixels_info_average_pixel,
+					perceptualHashCompareImages.getAverageValueOfPixels(it).toString()
+				)
+			}
 		}
 	}
 

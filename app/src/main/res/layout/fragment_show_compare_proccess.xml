@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/black26">
+	android:background="@color/black26"
+	android:scrollbarSize="2dp"
+	android:scrollbarThumbVertical="@color/white">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
@@ -176,22 +179,125 @@
 			app:layout_constraintStart_toStartOf="@id/ivScaledImageOne"
 			app:layout_constraintTop_toTopOf="@id/ivGrayScaleImageOne" />
 
+		<TextView
+			android:id="@+id/tvPixelsInfo"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:text="@string/show_compare_process_pixels_info_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/ivGrayScaleImageOne" />
 
-		<!--		<TextView-->
-		<!--			android:id="@+id/btnClose"-->
-		<!--			style="@style/S20White"-->
-		<!--			android:layout_width="match_parent"-->
-		<!--			android:layout_height="wrap_content"-->
-		<!--			android:layout_marginHorizontal="16dp"-->
-		<!--			android:layout_marginTop="16dp"-->
-		<!--			android:layout_marginBottom="16dp"-->
-		<!--			android:background="@drawable/background_choose_button_gallery"-->
-		<!--			android:gravity="center"-->
-		<!--			android:paddingVertical="16dp"-->
-		<!--			android:text="@string/show_compare_process_close_button_title"-->
-		<!--			app:layout_constraintEnd_toEndOf="parent"-->
-		<!--			app:layout_constraintStart_toStartOf="parent"-->
-		<!--			app:layout_constraintTop_toBottomOf="@id/ivGrayScaleImageOne" />-->
+		<LinearLayout
+			android:id="@+id/llPixelInfoImageOne"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="vertical"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintTop_toBottomOf="@id/tvPixelsInfo">
+
+			<TextView
+				android:id="@+id/tvPixelCountImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_count" />
+
+			<TextView
+				android:id="@+id/tvPixelsSumImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_sum" />
+
+			<TextView
+				android:id="@+id/tvAveragePixelImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginBottom="8dp"
+				tools:text="@string/show_compare_process_pixels_info_average_pixel" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepFourth"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:background="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/llPixelInfoImageOne"
+			app:layout_constraintEnd_toEndOf="@id/ivScaledImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivScaledImageOne"
+			app:layout_constraintTop_toTopOf="@id/llPixelInfoImageOne" />
+
+		<LinearLayout
+			android:id="@+id/llPixelInfoImageTwo"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="vertical"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintTop_toBottomOf="@id/tvPixelsInfo">
+
+			<TextView
+				android:id="@+id/tvPixelCountImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_count" />
+
+			<TextView
+				android:id="@+id/tvPixelsSumImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_sum" />
+
+			<TextView
+				android:id="@+id/tvAveragePixelImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginBottom="8dp"
+				tools:text="@string/show_compare_process_pixels_info_average_pixel" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/btnClose"
+			style="@style/S20White"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			android:background="@drawable/background_purple_button_selector"
+			android:gravity="center"
+			android:paddingVertical="16dp"
+			android:text="@string/show_compare_process_close_button_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/llPixelInfoImageOne" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

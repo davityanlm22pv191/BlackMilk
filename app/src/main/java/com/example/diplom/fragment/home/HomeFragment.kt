@@ -115,7 +115,6 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 			val imageTwoBitmap: Bitmap = imageTwo.bitmap!!
 
 			val fragment: Fragment = ShowCompareProcessFragment.newInstance(
-				this,
 				ShowCompareProcessParams(
 					imageOneBitmap,
 					imageTwoBitmap

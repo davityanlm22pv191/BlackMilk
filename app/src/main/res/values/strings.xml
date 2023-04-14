@@ -30,7 +30,11 @@
 	<string name="show_compare_process_source_image_step_first">1. Исходник</string>
 	<string name="show_compare_process_scaled_image_step_second">2. Уменьшенное изображение</string>
 	<string name="show_compare_process_to_gray_scale_step_third">3. В оттенках серого</string>
+	<string name="show_compare_process_pixels_info_title">4. Информация о пикселях</string>
 	<string name="show_compare_process_close_button_title">Выйти</string>
+	<string name="show_compare_process_pixels_info_pixels_count">Всего пикселей: %s</string>
+	<string name="show_compare_process_pixels_info_pixels_sum">Сумма пикселей: %s</string>
+	<string name="show_compare_process_pixels_info_average_pixel">Средний пиксель: %s</string>
 	<!--end region-->
 
 </resources>
