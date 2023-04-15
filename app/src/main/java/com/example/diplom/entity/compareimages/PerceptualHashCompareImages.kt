@@ -23,6 +23,27 @@ class PerceptualHashCompareImages {
 
 	// region ================ Public ====================
 
+//	fun convertBitmapToBinary(image: Bitmap, threshold: Int, accuracy: Int,): Long {
+//		var hash: Long = 0
+//		val pixels = LongArray(image.width * image.height)
+//		for (y in 0 until image.height) {
+//			for (x in 0 until image.width) {
+//				val pixel = image.getPixel(x, y)
+//				val alpha = Color.alpha(pixel)
+//				val red = Color.red(pixel)
+//				val green = Color.green(pixel)
+//				val blue = Color.blue(pixel)
+//				val gray = (0.2989 * red + 0.587 * green + 0.114 * blue).toInt()
+//				pixels[y * image.width + x] =
+//					if (gray > threshold) ((alpha ushl 24) or 1).toLong() else ((alpha shl 24) or 0).toLong()
+//			}
+//		}
+//		for (i in 0 until accuracy ) {
+//			hash = hash or (pixels[i] shl i)
+//		}
+//		return hash
+//	}
+
 	fun getAccuracyByApiLevel(): Int {
 		return when (Build.VERSION.SDK_INT) {
 			in VERSION_CODES.BASE..VERSION_CODES.M -> {

@@ -32,6 +32,10 @@ class ShowCompareProcessFragment(
 	private var grayScaleImageOne: Bitmap? = null
 	private var grayScaleImageTwo: Bitmap? = null
 
+	/** Step fourth */
+	private var averagePixelImageOne: Int? = null
+	private var averagePixelImageTwo: Int? = null
+
 	//region ==================== Object creation ====================
 
 	companion object {
@@ -101,9 +105,24 @@ class ShowCompareProcessFragment(
 			setPixelsInfo(this)
 
 			/** Step fifth */
-
+			setCreatingHashResult(this)
 
 		}
+	}
+
+	private fun setCreatingHashResult(view: View) {
+//		view.apply {
+//			grayScaleImageOne?.let { bitmap ->
+//				averagePixelImageOne?.let { averagePixel ->
+//					findViewById<TextView>(R.id.tvStepFifth).text =
+//						perceptualHashCompareImages.convertBitmapToBinary(
+//							bitmap,
+//							averagePixel,
+//							perceptualHashCompareImages.getAccuracyByApiLevel()
+//						).toString()
+//				}
+//			}
+//		}
 	}
 
 	private fun setPixelsInfo(view: View) {
@@ -117,9 +136,10 @@ class ShowCompareProcessFragment(
 					R.string.show_compare_process_pixels_info_pixels_sum,
 					perceptualHashCompareImages.getPixelSum(it).toString()
 				)
+				averagePixelImageOne = perceptualHashCompareImages.getAverageValueOfPixels(it)
 				findViewById<TextView>(R.id.tvAveragePixelImageOne).text = resources.getString(
 					R.string.show_compare_process_pixels_info_average_pixel,
-					perceptualHashCompareImages.getAverageValueOfPixels(it).toString()
+					averagePixelImageOne.toString()
 				)
 			}
 			grayScaleImageTwo?.let {
@@ -131,9 +151,10 @@ class ShowCompareProcessFragment(
 					R.string.show_compare_process_pixels_info_pixels_sum,
 					perceptualHashCompareImages.getPixelSum(it).toString()
 				)
+				averagePixelImageTwo = perceptualHashCompareImages.getAverageValueOfPixels(it)
 				findViewById<TextView>(R.id.tvAveragePixelImageTwo).text = resources.getString(
 					R.string.show_compare_process_pixels_info_average_pixel,
-					perceptualHashCompareImages.getAverageValueOfPixels(it).toString()
+					averagePixelImageTwo.toString()
 				)
 			}
 		}
@@ -168,6 +189,7 @@ class ShowCompareProcessFragment(
 
 	private fun setupBackActions(view: View) {
 		view.findViewById<ImageView>(R.id.ivArrowBack).setOnClickListener { close() }
+		view.findViewById<TextView>(R.id.btnClose).setOnClickListener { close() }
 		onBackClicked()
 	}
 
