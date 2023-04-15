@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
-import com.example.diplom.entity.PerceptualHashCompareImages
+import com.example.diplom.entity.compareimages.PerceptualHashCompareImages
 import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
 
 class ShowCompareProcessFragment(
@@ -147,6 +147,13 @@ class ShowCompareProcessFragment(
 	}
 
 	private fun setScaledImages(view: View) {
+		val accuracy: String = perceptualHashCompareImages.getAccuracyByApiLevel().toString()
+		view.findViewById<TextView>(R.id.tvStepTwo).text =
+			resources.getString(
+				R.string.show_compare_process_scaled_image_step_second,
+				accuracy,
+				accuracy
+			)
 		scaledImageOne = perceptualHashCompareImages.getScaledBitmap(srcImageOne)
 		scaledImageTwo = perceptualHashCompareImages.getScaledBitmap(srcImageTwo)
 		view.findViewById<ImageView>(R.id.ivScaledImageOne)

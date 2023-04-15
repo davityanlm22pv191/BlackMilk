@@ -1,4 +1,4 @@
-package com.example.diplom.entity
+package com.example.diplom.entity.compareimages
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -6,21 +6,50 @@ import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
-import com.example.diplom.helpers.DimenHelper
+import android.os.Build
+import android.os.Build.VERSION_CODES
 
 class PerceptualHashCompareImages {
 
 	private companion object {
+		const val VERY_WEAK = 16
+		const val WEAK = 32
+		const val NORMAL = 64
+		const val STRONG = 128
+		const val VERY_STRONG = 256
+
 		const val COLOR_FILTER_COUNT = 3
 	}
 
 	// region ================ Public ====================
 
+	fun getAccuracyByApiLevel(): Int {
+		return when (Build.VERSION.SDK_INT) {
+			in VERSION_CODES.BASE..VERSION_CODES.M -> {
+				VERY_WEAK
+			}
+			VERSION_CODES.N, VERSION_CODES.N_MR1 -> {
+				WEAK
+			}
+			VERSION_CODES.O, VERSION_CODES.O_MR1 -> {
+				NORMAL
+			}
+			VERSION_CODES.Q, VERSION_CODES.R -> {
+				STRONG
+			}
+			VERSION_CODES.S, VERSION_CODES.S_V2, VERSION_CODES.TIRAMISU -> {
+				VERY_STRONG
+			}
+			else -> STRONG
+		}
+	}
+
 	fun getScaledBitmap(imageBitmap: Bitmap): Bitmap {
+		val accuracy: Int = getAccuracyByApiLevel()
 		return Bitmap.createScaledBitmap(
 			imageBitmap,
-			DimenHelper.DIMEN_8_DP,
-			DimenHelper.DIMEN_8_DP,
+			accuracy,
+			accuracy,
 			true
 		)
 	}

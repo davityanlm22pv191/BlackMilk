@@ -33,10 +33,9 @@
 				style="@style/S20White"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical|center_horizontal"
 				android:layout_marginStart="16dp"
 				android:layout_weight="1"
-				android:gravity="center"
+				android:paddingStart="16dp"
 				android:text="@string/show_compare_process_title" />
 
 		</LinearLayout>
@@ -93,6 +92,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="32dp"
+			android:letterSpacing="-0.03"
 			android:layout_marginTop="16dp"
 			android:text="@string/show_compare_process_scaled_image_step_second"
 			app:layout_constraintEnd_toEndOf="parent"
