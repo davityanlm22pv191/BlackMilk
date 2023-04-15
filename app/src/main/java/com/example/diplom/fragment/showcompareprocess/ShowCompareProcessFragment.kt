@@ -99,6 +99,10 @@ class ShowCompareProcessFragment(
 
 			/** Step Fourth */
 			setPixelsInfo(this)
+
+			/** Step fifth */
+
+
 		}
 	}
 

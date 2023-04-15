@@ -33,6 +33,14 @@
 		<item name="android:textColor">@color/white</item>
 	</style>
 
+	<style name="S18Green46" parent="S18">
+		<item name="android:textColor">@color/green46</item>
+	</style>
+
+	<style name="S18Red46" parent="S18">
+		<item name="android:textColor">@color/red46</item>
+	</style>
+
 	<style name="S20White" parent="S20">
 		<item name="android:textColor">@color/white</item>
 	</style>

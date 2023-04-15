@@ -30,11 +30,15 @@
 	<string name="show_compare_process_source_image_step_first">1. Исходник</string>
 	<string name="show_compare_process_scaled_image_step_second">2. Уменьшенное изображение (%1$s x  %2$s)</string>
 	<string name="show_compare_process_to_gray_scale_step_third">3. В оттенках серого</string>
-	<string name="show_compare_process_pixels_info_title">4. Информация о пикселях</string>
+	<string name="show_compare_process_pixels_info_title_step_fouth">4. Информация о пикселях</string>
+	<string name="show_compare_process_pixels_creating_perceptive_hash_code_step_fifth">5. Создание перцептиного хеш-кода</string>
+	<string name="show_compare_process_pixels_result_code_step_sixth">6. Результат</string>
 	<string name="show_compare_process_close_button_title">Выйти</string>
 	<string name="show_compare_process_pixels_info_pixels_count">Всего пикселей: %s</string>
 	<string name="show_compare_process_pixels_info_pixels_sum">Сумма пикселей: %s</string>
 	<string name="show_compare_process_pixels_info_average_pixel">Средний пиксель: %s</string>
+	<string name="show_compare_process_creating_perceptive_hash_code_success">Галочка</string>
+	<string name="show_compare_process_creating_perceptive_hash_code_failed">Провал</string>
 	<!--end region-->
 
 </resources>
