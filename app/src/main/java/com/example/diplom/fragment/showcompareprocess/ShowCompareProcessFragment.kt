@@ -39,7 +39,7 @@ class ShowCompareProcessFragment(
 
 	/** Step fifth */
 	private var hashImageOne: BigInteger? = null
-	private val imageTwo: BigInteger? = null
+	private var hashImageTwo: BigInteger? = null
 
 	//region ==================== Object creation ====================
 
@@ -116,18 +116,43 @@ class ShowCompareProcessFragment(
 	}
 
 	private fun setCreatingHashResult(view: View) {
-//		view.apply {
-//			grayScaleImageOne?.let { bitmap ->
-//				averagePixelImageOne?.let { averagePixel ->
-//					hashImageOne = perceptualHash.convertBitmapToBinaryHash(
-//						bitmap,
-//						perceptualHash.getAccuracyByApiLevel()
-//					)
-//					findViewById<TextView>(R.id.tvStepFourth).text = hashImageOne.toString()
-//					findViewById<TextView>(R.id.tvStepFifth).text = hashImageOne.toString().length.toString()
-//				}
-//			}
-//		}
+		val accuracyByApiLevel = perceptualHash.getAccuracyByApiLevel()
+		view.apply {
+			grayScaleImageOne?.let { bitmap ->
+				hashImageOne = perceptualHash.convertBitmapToBinaryHash(
+					bitmap,
+					accuracyByApiLevel
+				)
+			}
+			grayScaleImageTwo?.let { bitmap ->
+				hashImageTwo = perceptualHash.convertBitmapToBinaryHash(
+					bitmap,
+					accuracyByApiLevel
+				)
+			}
+			val tvSuccessOrFailImageOne = findViewById<TextView>(R.id.tvSuccessOrFailImageOne)
+			val ivSuccessOrFailImageOne = findViewById<ImageView>(R.id.ivSuccessOrFailImageOne)
+			if (hashImageOne != null) {
+				tvSuccessOrFailImageOne.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
+				tvSuccessOrFailImageOne.setTextAppearance(R.style.S18Green46)
+				ivSuccessOrFailImageOne.setImageResource(R.drawable.ic_success)
+			} else {
+				tvSuccessOrFailImageOne.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
+				tvSuccessOrFailImageOne.setTextAppearance(R.style.S18Red46)
+				ivSuccessOrFailImageOne.setImageResource(R.drawable.ic_failed)
+			}
+			val tvSuccessOrFailImageTwo = findViewById<TextView>(R.id.tvSuccessOrFailImageTwo)
+			val ivSuccessOrFailImageTwo = findViewById<ImageView>(R.id.ivSuccessOrFailImageTwo)
+			if (hashImageTwo != null) {
+				tvSuccessOrFailImageTwo.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
+				tvSuccessOrFailImageTwo.setTextAppearance(R.style.S18Green46)
+				ivSuccessOrFailImageTwo.setImageResource(R.drawable.ic_success)
+			} else {
+				tvSuccessOrFailImageTwo.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
+				tvSuccessOrFailImageTwo.setTextAppearance(R.style.S18Red46)
+				ivSuccessOrFailImageTwo.setImageResource(R.drawable.ic_failed)
+			}
+		}
 	}
 
 	private fun setPixelsInfo(view: View) {

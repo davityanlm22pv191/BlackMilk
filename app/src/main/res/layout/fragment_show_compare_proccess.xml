@@ -326,7 +326,7 @@
 
 			<TextView
 				android:id="@+id/tvSuccessOrFailImageOne"
-				style="@style/S18Green46"
+
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="8dp"
@@ -364,7 +364,6 @@
 
 			<TextView
 				android:id="@+id/tvSuccessOrFailImageTwo"
-				style="@style/S18Red46"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="8dp"

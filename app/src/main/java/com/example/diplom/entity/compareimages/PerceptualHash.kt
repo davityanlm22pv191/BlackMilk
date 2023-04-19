@@ -17,58 +17,99 @@ class PerceptualHash {
 		const val WEAK = 32
 		const val NORMAL = 64
 		const val STRONG = 128
-		const val VERY_STRONG = 8
+		const val VERY_STRONG = 256
 
 		const val COLOR_FILTER_COUNT = 3
 	}
 
 	// region ================ Public ====================
 
-//	fun convertBitmapToBinaryHash(imageBitmap: Bitmap, accuracy: Int): BigInteger {
-//		require(imageBitmap.width > 0 && imageBitmap.height > 0) { "Bitmap is empty" }
-//		require(accuracy <= imageBitmap.width && accuracy <= imageBitmap.height) { "Accuracy can't be greater than image dimension" }
-//
-//		val pixelArray = IntArray(imageBitmap.width * imageBitmap.height)
-//		imageBitmap.getPixels(pixelArray, 0, imageBitmap.width, 0, 0, imageBitmap.width, imageBitmap.height)
-//
-//		val averagePixel = pixelArray.average().toInt()
-//
-//		var binaryHash = BigInteger.ZERO
-//		var bitPosition = BigInteger.ONE
-//
-//		for (y in 0 until accuracy) {
-//			for (x in 0 until accuracy) {
-//				val pixel = pixelArray[(x * imageBitmap.width / accuracy) + (y * imageBitmap.height / accuracy) * imageBitmap.width]
-//				if (pixel >= averagePixel) {
-//					binaryHash = binaryHash.or(bitPosition)
-//
-//				}
-//				bitPosition = bitPosition.shiftLeft(1)
-//			}
-//		}
-//
-//		return binaryHash
-//	}
-//	fun convertBitmapToBinary(image: Bitmap, threshold: Int, accuracy: Int,): Long {
-//		var hash: Long = 0
-//		val pixels = LongArray(image.width * image.height)
-//		for (y in 0 until image.height) {
-//			for (x in 0 until image.width) {
-//				val pixel = image.getPixel(x, y)
-//				val alpha = Color.alpha(pixel)
-//				val red = Color.red(pixel)
-//				val green = Color.green(pixel)
-//				val blue = Color.blue(pixel)
-//				val gray = (0.2989 * red + 0.587 * green + 0.114 * blue).toInt()
-//				pixels[y * image.width + x] =
-//					if (gray > threshold) ((alpha ushl 24) or 1).toLong() else ((alpha shl 24) or 0).toLong()
-//			}
-//		}
-//		for (i in 0 until accuracy ) {
-//			hash = hash or (pixels[i] shl i)
-//		}
-//		return hash
-//	}
+	fun convertBitmapToBinaryHashString(imageBitmap: Bitmap, accuracy: Int): String {
+		if (imageBitmap.width <= 0 || imageBitmap.height <= 0) {
+			return "Bitmap is empty"
+		}
+		if (accuracy > imageBitmap.width || accuracy > imageBitmap.height) {
+			return "Accuracy can't be greater than image dimension"
+		}
+
+		val pixelArray = IntArray(imageBitmap.width * imageBitmap.height)
+		imageBitmap.getPixels(
+			pixelArray,
+			0,
+			imageBitmap.width,
+			0,
+			0,
+			imageBitmap.width,
+			imageBitmap.height
+		)
+
+		val averagePixel = pixelArray.average().toInt()
+
+		var binaryHash = BigInteger.ZERO
+		var bitPosition = BigInteger.ONE
+
+		for (y in 0 until accuracy) {
+			for (x in 0 until accuracy) {
+				val pixel =
+					pixelArray[(x * imageBitmap.width / accuracy) + (y * imageBitmap.height / accuracy) * imageBitmap.width]
+				if (pixel >= averagePixel) {
+					binaryHash = binaryHash.or(bitPosition)
+				}
+				bitPosition = bitPosition.shiftLeft(1)
+				if (y == accuracy - 1 && x == accuracy - 1) {
+					binaryHash =
+						binaryHash.setBit(accuracy * accuracy - 1) // устанавливаем последний бит в 1
+					break
+				}
+			}
+		}
+
+		return String.format("%064d", BigInteger(binaryHash.toString(2)))
+	}
+
+	fun convertBitmapToBinaryHash(imageBitmap: Bitmap, accuracy: Int): BigInteger? {
+		if (imageBitmap.width <= 0 || imageBitmap.height <= 0) {
+			return null
+		}
+		if (accuracy > imageBitmap.width || accuracy > imageBitmap.height) {
+			return null
+		}
+
+		val pixelArray = IntArray(imageBitmap.width * imageBitmap.height)
+		imageBitmap.getPixels(
+			pixelArray,
+			0,
+			imageBitmap.width,
+			0,
+			0,
+			imageBitmap.width,
+			imageBitmap.height
+		)
+
+		val averagePixel = pixelArray.average().toInt()
+
+		var binaryHash = BigInteger.ZERO
+		var bitPosition = BigInteger.ONE
+
+		for (y in 0 until accuracy) {
+			for (x in 0 until accuracy) {
+				val pixel =
+					pixelArray[(x * imageBitmap.width / accuracy) + (y * imageBitmap.height / accuracy) * imageBitmap.width]
+				if (pixel >= averagePixel) {
+					binaryHash = binaryHash.or(bitPosition)
+				}
+				bitPosition = bitPosition.shiftLeft(1)
+				if (y == accuracy - 1 && x == accuracy - 1) {
+					return binaryHash.setBit(accuracy * accuracy - 1) // устанавливаем 64-й бит в 1
+				}
+			}
+		}
+		val paddingBits = accuracy * accuracy - bitPosition.bitLength()
+		if (paddingBits > 0) {
+			binaryHash = binaryHash.shiftLeft(paddingBits).or(BigInteger.ZERO)
+		}
+		return binaryHash
+	}
 
 	fun getAccuracyByApiLevel(): Int {
 		return when (Build.VERSION.SDK_INT) {
