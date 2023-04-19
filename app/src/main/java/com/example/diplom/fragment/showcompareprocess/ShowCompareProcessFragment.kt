@@ -112,6 +112,22 @@ class ShowCompareProcessFragment(
 			/** Step fifth */
 			setCreatingHashResult(this)
 
+			/** Step sixth */
+			setResult(this)
+
+		}
+	}
+
+	private fun setResult(view: View) {
+		val ivCompareResult = view.findViewById<ImageView>(R.id.ivCompareResult)
+		hashImageOne?.let { hashOne ->
+			hashImageTwo?.let { hashTwo ->
+				if (hashOne.bitLength() != hashTwo.bitLength()) {
+					ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
+				} else {
+					ivCompareResult.setImageResource(R.drawable.ic_equal_green)
+				}
+			}
 		}
 	}
 
@@ -132,23 +148,39 @@ class ShowCompareProcessFragment(
 			}
 			val tvSuccessOrFailImageOne = findViewById<TextView>(R.id.tvSuccessOrFailImageOne)
 			val ivSuccessOrFailImageOne = findViewById<ImageView>(R.id.ivSuccessOrFailImageOne)
+			val tvHashLengthImageOne = findViewById<TextView>(R.id.tvHashLengthImageOne)
+			val tvSuccessOrFailImageTwo = findViewById<TextView>(R.id.tvSuccessOrFailImageTwo)
+			val ivSuccessOrFailImageTwo = findViewById<ImageView>(R.id.ivSuccessOrFailImageTwo)
+			val tvHashLengthImageTwo = findViewById<TextView>(R.id.tvHashLengthImageTwo)
+
 			if (hashImageOne != null) {
-				tvSuccessOrFailImageOne.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
+				tvHashLengthImageOne.text = resources.getString(
+					R.string.show_compare_process_hash_length,
+					hashImageOne?.bitLength()?.toString()
+				)
+				tvSuccessOrFailImageOne.text =
+					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
 				tvSuccessOrFailImageOne.setTextAppearance(R.style.S18Green46)
 				ivSuccessOrFailImageOne.setImageResource(R.drawable.ic_success)
 			} else {
-				tvSuccessOrFailImageOne.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
+				tvSuccessOrFailImageOne.text =
+					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
 				tvSuccessOrFailImageOne.setTextAppearance(R.style.S18Red46)
 				ivSuccessOrFailImageOne.setImageResource(R.drawable.ic_failed)
 			}
-			val tvSuccessOrFailImageTwo = findViewById<TextView>(R.id.tvSuccessOrFailImageTwo)
-			val ivSuccessOrFailImageTwo = findViewById<ImageView>(R.id.ivSuccessOrFailImageTwo)
+
 			if (hashImageTwo != null) {
-				tvSuccessOrFailImageTwo.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
+				tvHashLengthImageTwo.text = resources.getString(
+					R.string.show_compare_process_hash_length,
+					hashImageTwo?.bitLength()?.toString()
+				)
+				tvSuccessOrFailImageTwo.text =
+					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
 				tvSuccessOrFailImageTwo.setTextAppearance(R.style.S18Green46)
 				ivSuccessOrFailImageTwo.setImageResource(R.drawable.ic_success)
 			} else {
-				tvSuccessOrFailImageTwo.text = resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
+				tvSuccessOrFailImageTwo.text =
+					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_failed)
 				tvSuccessOrFailImageTwo.setTextAppearance(R.style.S18Red46)
 				ivSuccessOrFailImageTwo.setImageResource(R.drawable.ic_failed)
 			}

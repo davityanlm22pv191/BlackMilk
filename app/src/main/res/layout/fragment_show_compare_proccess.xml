@@ -306,6 +306,18 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/llPixelInfoImageOne" />
 
+		<TextView
+			android:id="@+id/tvHashLengthImageOne"
+			style="@style/S12White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:paddingStart="8dp"
+			android:text="@string/show_compare_process_hash_length"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFifth" />
+
 		<LinearLayout
 			android:id="@+id/llFiveStepInfoImageOne"
 			android:layout_width="0dp"
@@ -315,7 +327,7 @@
 			android:paddingStart="16dp"
 			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
 			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
-			app:layout_constraintTop_toBottomOf="@id/tvStepFifth">
+			app:layout_constraintTop_toBottomOf="@id/tvHashLengthImageOne">
 
 			<ImageView
 				android:id="@+id/ivSuccessOrFailImageOne"
@@ -342,7 +354,19 @@
 			app:layout_constraintBottom_toBottomOf="@id/llFiveStepInfoImageOne"
 			app:layout_constraintEnd_toStartOf="@id/llFiveStepInfoImageTwo"
 			app:layout_constraintStart_toEndOf="@id/llFiveStepInfoImageOne"
-			app:layout_constraintTop_toTopOf="@id/llFiveStepInfoImageOne" />
+			app:layout_constraintTop_toTopOf="@id/tvHashLengthImageOne" />
+
+		<TextView
+			android:id="@+id/tvHashLengthImageTwo"
+			style="@style/S12White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:paddingStart="8dp"
+			android:text="@string/show_compare_process_hash_length"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFifth" />
 
 		<LinearLayout
 			android:id="@+id/llFiveStepInfoImageTwo"
@@ -353,7 +377,7 @@
 			android:paddingStart="16dp"
 			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
 			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
-			app:layout_constraintTop_toBottomOf="@id/tvStepFifth">
+			app:layout_constraintTop_toBottomOf="@id/tvHashLengthImageTwo">
 
 			<ImageView
 				android:id="@+id/ivSuccessOrFailImageTwo"
@@ -392,7 +416,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			app:layout_constraintTop_toBottomOf="@id/btnClose"/>
+			app:layout_constraintTop_toBottomOf="@id/btnClose" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

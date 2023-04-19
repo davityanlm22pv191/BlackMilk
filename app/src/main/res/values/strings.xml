@@ -37,6 +37,7 @@
 	<string name="show_compare_process_pixels_info_pixels_count">Всего пикселей: %s</string>
 	<string name="show_compare_process_pixels_info_pixels_sum">Сумма пикселей: %s</string>
 	<string name="show_compare_process_pixels_info_average_pixel">Средний пиксель: %s</string>
+	<string name="show_compare_process_hash_length">Длина хеша: %s</string>
 	<string name="show_compare_process_creating_perceptive_hash_code_success">Галочка</string>
 	<string name="show_compare_process_creating_perceptive_hash_code_failed">Провал</string>
 	<!--end region-->
