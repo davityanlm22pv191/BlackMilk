@@ -191,7 +191,7 @@
 			app:layout_constraintTop_toTopOf="@id/ivGrayScaleImageOne" />
 
 		<TextView
-			android:id="@+id/tvPixelsInfo"
+			android:id="@+id/tvStepFourth"
 			style="@style/S16White"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -210,7 +210,7 @@
 			android:orientation="vertical"
 			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
 			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
-			app:layout_constraintTop_toBottomOf="@id/tvPixelsInfo">
+			app:layout_constraintTop_toBottomOf="@id/tvStepFourth">
 
 			<TextView
 				android:id="@+id/tvPixelCountImageOne"
@@ -262,7 +262,7 @@
 			android:orientation="vertical"
 			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
 			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
-			app:layout_constraintTop_toBottomOf="@id/tvPixelsInfo">
+			app:layout_constraintTop_toBottomOf="@id/tvStepFourth">
 
 			<TextView
 				android:id="@+id/tvPixelCountImageTwo"

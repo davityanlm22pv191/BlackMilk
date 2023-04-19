@@ -8,21 +8,47 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Build
 import android.os.Build.VERSION_CODES
+import java.math.BigInteger
 
-class PerceptualHashCompareImages {
+class PerceptualHash {
 
 	private companion object {
 		const val VERY_WEAK = 16
 		const val WEAK = 32
 		const val NORMAL = 64
 		const val STRONG = 128
-		const val VERY_STRONG = 256
+		const val VERY_STRONG = 8
 
 		const val COLOR_FILTER_COUNT = 3
 	}
 
 	// region ================ Public ====================
 
+//	fun convertBitmapToBinaryHash(imageBitmap: Bitmap, accuracy: Int): BigInteger {
+//		require(imageBitmap.width > 0 && imageBitmap.height > 0) { "Bitmap is empty" }
+//		require(accuracy <= imageBitmap.width && accuracy <= imageBitmap.height) { "Accuracy can't be greater than image dimension" }
+//
+//		val pixelArray = IntArray(imageBitmap.width * imageBitmap.height)
+//		imageBitmap.getPixels(pixelArray, 0, imageBitmap.width, 0, 0, imageBitmap.width, imageBitmap.height)
+//
+//		val averagePixel = pixelArray.average().toInt()
+//
+//		var binaryHash = BigInteger.ZERO
+//		var bitPosition = BigInteger.ONE
+//
+//		for (y in 0 until accuracy) {
+//			for (x in 0 until accuracy) {
+//				val pixel = pixelArray[(x * imageBitmap.width / accuracy) + (y * imageBitmap.height / accuracy) * imageBitmap.width]
+//				if (pixel >= averagePixel) {
+//					binaryHash = binaryHash.or(bitPosition)
+//
+//				}
+//				bitPosition = bitPosition.shiftLeft(1)
+//			}
+//		}
+//
+//		return binaryHash
+//	}
 //	fun convertBitmapToBinary(image: Bitmap, threshold: Int, accuracy: Int,): Long {
 //		var hash: Long = 0
 //		val pixels = LongArray(image.width * image.height)

@@ -10,15 +10,16 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
-import com.example.diplom.entity.compareimages.PerceptualHashCompareImages
+import com.example.diplom.entity.compareimages.PerceptualHash
 import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
+import java.math.BigInteger
 
 class ShowCompareProcessFragment(
 	private val showCompareProcessParams: ShowCompareProcessParams,
 ) : Fragment(R.layout.fragment_show_compare_proccess), ShowCompareProcessContract {
 
 	/** Init class for alg process */
-	private val perceptualHashCompareImages = PerceptualHashCompareImages()
+	private val perceptualHash = PerceptualHash()
 
 	/** Step first */
 	private val srcImageOne: Bitmap = showCompareProcessParams.imageBitmapOne
@@ -35,6 +36,10 @@ class ShowCompareProcessFragment(
 	/** Step fourth */
 	private var averagePixelImageOne: Int? = null
 	private var averagePixelImageTwo: Int? = null
+
+	/** Step fifth */
+	private var hashImageOne: BigInteger? = null
+	private val imageTwo: BigInteger? = null
 
 	//region ==================== Object creation ====================
 
@@ -114,12 +119,12 @@ class ShowCompareProcessFragment(
 //		view.apply {
 //			grayScaleImageOne?.let { bitmap ->
 //				averagePixelImageOne?.let { averagePixel ->
-//					findViewById<TextView>(R.id.tvStepFifth).text =
-//						perceptualHashCompareImages.convertBitmapToBinary(
-//							bitmap,
-//							averagePixel,
-//							perceptualHashCompareImages.getAccuracyByApiLevel()
-//						).toString()
+//					hashImageOne = perceptualHash.convertBitmapToBinaryHash(
+//						bitmap,
+//						perceptualHash.getAccuracyByApiLevel()
+//					)
+//					findViewById<TextView>(R.id.tvStepFourth).text = hashImageOne.toString()
+//					findViewById<TextView>(R.id.tvStepFifth).text = hashImageOne.toString().length.toString()
 //				}
 //			}
 //		}
@@ -130,13 +135,13 @@ class ShowCompareProcessFragment(
 			grayScaleImageOne?.let {
 				findViewById<TextView>(R.id.tvPixelCountImageOne).text = resources.getString(
 					R.string.show_compare_process_pixels_info_pixels_count,
-					perceptualHashCompareImages.getPixelCount(it).toString()
+					perceptualHash.getPixelCount(it).toString()
 				)
 				findViewById<TextView>(R.id.tvPixelsSumImageOne).text = resources.getString(
 					R.string.show_compare_process_pixels_info_pixels_sum,
-					perceptualHashCompareImages.getPixelSum(it).toString()
+					perceptualHash.getPixelSum(it).toString()
 				)
-				averagePixelImageOne = perceptualHashCompareImages.getAverageValueOfPixels(it)
+				averagePixelImageOne = perceptualHash.getAverageValueOfPixels(it)
 				findViewById<TextView>(R.id.tvAveragePixelImageOne).text = resources.getString(
 					R.string.show_compare_process_pixels_info_average_pixel,
 					averagePixelImageOne.toString()
@@ -145,13 +150,13 @@ class ShowCompareProcessFragment(
 			grayScaleImageTwo?.let {
 				findViewById<TextView>(R.id.tvPixelCountImageTwo).text = resources.getString(
 					R.string.show_compare_process_pixels_info_pixels_count,
-					perceptualHashCompareImages.getPixelCount(it).toString()
+					perceptualHash.getPixelCount(it).toString()
 				)
 				findViewById<TextView>(R.id.tvPixelsSumImageTwo).text = resources.getString(
 					R.string.show_compare_process_pixels_info_pixels_sum,
-					perceptualHashCompareImages.getPixelSum(it).toString()
+					perceptualHash.getPixelSum(it).toString()
 				)
-				averagePixelImageTwo = perceptualHashCompareImages.getAverageValueOfPixels(it)
+				averagePixelImageTwo = perceptualHash.getAverageValueOfPixels(it)
 				findViewById<TextView>(R.id.tvAveragePixelImageTwo).text = resources.getString(
 					R.string.show_compare_process_pixels_info_average_pixel,
 					averagePixelImageTwo.toString()
@@ -162,25 +167,25 @@ class ShowCompareProcessFragment(
 
 	private fun setGrayScaleImages(view: View) {
 		scaledImageOne?.let {
-			grayScaleImageOne = perceptualHashCompareImages.getGrayScaleBitmap(it)
+			grayScaleImageOne = perceptualHash.getGrayScaleBitmap(it)
 		}
 		scaledImageTwo?.let {
-			grayScaleImageTwo = perceptualHashCompareImages.getGrayScaleBitmap(it)
+			grayScaleImageTwo = perceptualHash.getGrayScaleBitmap(it)
 		}
 		view.findViewById<ImageView>(R.id.ivGrayScaleImageOne).setImageBitmap(grayScaleImageOne)
 		view.findViewById<ImageView>(R.id.ivGrayScaleImageTwo).setImageBitmap(grayScaleImageTwo)
 	}
 
 	private fun setScaledImages(view: View) {
-		val accuracy: String = perceptualHashCompareImages.getAccuracyByApiLevel().toString()
+		val accuracy: String = perceptualHash.getAccuracyByApiLevel().toString()
 		view.findViewById<TextView>(R.id.tvStepTwo).text =
 			resources.getString(
 				R.string.show_compare_process_scaled_image_step_second,
 				accuracy,
 				accuracy
 			)
-		scaledImageOne = perceptualHashCompareImages.getScaledBitmap(srcImageOne)
-		scaledImageTwo = perceptualHashCompareImages.getScaledBitmap(srcImageTwo)
+		scaledImageOne = perceptualHash.getScaledBitmap(srcImageOne)
+		scaledImageTwo = perceptualHash.getScaledBitmap(srcImageTwo)
 		view.findViewById<ImageView>(R.id.ivScaledImageOne)
 			.setImageBitmap(scaledImageOne)
 		view.findViewById<ImageView>(R.id.ivScaledImageTwo)
