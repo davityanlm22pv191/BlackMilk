@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/black26"
+	android:scrollbarSize="2dp"
+	android:scrollbarThumbVertical="@color/white">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/llToolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="16dp"
+			android:orientation="horizontal"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<ImageView
+				android:id="@+id/ivArrowBack"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:src="@drawable/ic_arrow_back" />
+
+			<TextView
+				android:id="@+id/tvToolbarTitle"
+				style="@style/S20White"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_weight="1"
+				android:paddingStart="16dp"
+				android:text="@string/show_compare_process_title" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/tvStepFirst"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:text="@string/show_compare_process_source_image_step_first"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/llToolbar" />
+
+		<ImageView
+			android:id="@+id/ivSourceImageOne"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFirst" />
+
+		<ImageView
+			android:id="@+id/ivSourceImageTwo"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFirst" />
+
+		<ImageView
+			android:id="@+id/ivCompareResult"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintBottom_toBottomOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintEnd_toEndOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintStart_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintTop_toTopOf="@id/viewVerticalSeparatorStepFirst"
+			tools:src="@drawable/ic_equal_green" />
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepFirst"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:background="@color/white"
+			android:visibility="invisible"
+			app:layout_constraintBottom_toBottomOf="@id/ivSourceImageOne"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/ivSourceImageOne" />
+
+		<TextView
+			android:id="@+id/tvStepTwo"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:letterSpacing="-0.03"
+			android:text="@string/show_compare_process_scaled_image_step_second"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/ivSourceImageOne" />
+
+		<ImageView
+			android:id="@+id/ivScaledImageOne"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/tvStepTwo" />
+
+		<ImageView
+			android:id="@+id/ivScaledImageTwo"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintTop_toBottomOf="@id/tvStepTwo" />
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepSecond"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:background="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/ivScaledImageOne"
+			app:layout_constraintEnd_toEndOf="@id/ivScaledImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivScaledImageOne"
+			app:layout_constraintTop_toTopOf="@id/ivScaledImageOne" />
+
+		<TextView
+			android:id="@+id/tvStepThird"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:text="@string/show_compare_process_to_gray_scale_step_third"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/ivScaledImageOne" />
+
+		<ImageView
+			android:id="@+id/ivGrayScaleImageOne"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/tvStepThird" />
+
+		<ImageView
+			android:id="@+id/ivGrayScaleImageTwo"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
+			android:layout_marginTop="16dp"
+			android:background="@drawable/background_current_image"
+			android:padding="2dp"
+			android:scaleType="fitCenter"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="@id/viewVerticalSeparatorStepFirst"
+			app:layout_constraintTop_toBottomOf="@id/tvStepThird" />
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepThird"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:background="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintEnd_toEndOf="@id/ivScaledImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivScaledImageOne"
+			app:layout_constraintTop_toTopOf="@id/ivGrayScaleImageOne" />
+
+		<TextView
+			android:id="@+id/tvStepFourth"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:text="@string/show_compare_process_pixels_info_title_step_fouth"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/ivGrayScaleImageOne" />
+
+		<LinearLayout
+			android:id="@+id/llPixelInfoImageOne"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="vertical"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFourth">
+
+			<TextView
+				android:id="@+id/tvPixelCountImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_count" />
+
+			<TextView
+				android:id="@+id/tvPixelsSumImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_sum" />
+
+			<TextView
+				android:id="@+id/tvAveragePixelImageOne"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginBottom="8dp"
+				tools:text="@string/show_compare_process_pixels_info_average_pixel" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepFourth"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:background="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/llPixelInfoImageOne"
+			app:layout_constraintEnd_toEndOf="@id/ivScaledImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivScaledImageOne"
+			app:layout_constraintTop_toTopOf="@id/llPixelInfoImageOne" />
+
+		<LinearLayout
+			android:id="@+id/llPixelInfoImageTwo"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="vertical"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFourth">
+
+			<TextView
+				android:id="@+id/tvPixelCountImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_count" />
+
+			<TextView
+				android:id="@+id/tvPixelsSumImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				tools:text="@string/show_compare_process_pixels_info_pixels_sum" />
+
+			<TextView
+				android:id="@+id/tvAveragePixelImageTwo"
+				style="@style/S12White"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginBottom="8dp"
+				tools:text="@string/show_compare_process_pixels_info_average_pixel" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/tvStepFifth"
+			style="@style/S16White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="32dp"
+			android:layout_marginTop="16dp"
+			android:text="@string/show_compare_process_pixels_creating_perceptive_hash_code_step_fifth"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/llPixelInfoImageOne" />
+
+		<TextView
+			android:id="@+id/tvHashLengthImageOne"
+			style="@style/S12White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:paddingStart="8dp"
+			android:text="@string/show_compare_process_hash_length"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFifth" />
+
+		<LinearLayout
+			android:id="@+id/llFiveStepInfoImageOne"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="horizontal"
+			android:paddingStart="16dp"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageOne"
+			app:layout_constraintTop_toBottomOf="@id/tvHashLengthImageOne">
+
+			<ImageView
+				android:id="@+id/ivSuccessOrFailImageOne"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				tools:src="@drawable/ic_success" />
+
+			<TextView
+				android:id="@+id/tvSuccessOrFailImageOne"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				tools:text="Галочка" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/viewVerticalSeparatorStepFifth"
+			android:layout_width="2dp"
+			android:layout_height="0dp"
+			android:background="@color/white"
+			app:layout_constraintBottom_toBottomOf="@id/llFiveStepInfoImageOne"
+			app:layout_constraintEnd_toStartOf="@id/llFiveStepInfoImageTwo"
+			app:layout_constraintStart_toEndOf="@id/llFiveStepInfoImageOne"
+			app:layout_constraintTop_toTopOf="@id/tvHashLengthImageOne" />
+
+		<TextView
+			android:id="@+id/tvHashLengthImageTwo"
+			style="@style/S12White"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:paddingStart="8dp"
+			android:text="@string/show_compare_process_hash_length"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintTop_toBottomOf="@id/tvStepFifth" />
+
+		<LinearLayout
+			android:id="@+id/llFiveStepInfoImageTwo"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:orientation="horizontal"
+			android:paddingStart="16dp"
+			app:layout_constraintEnd_toEndOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintStart_toStartOf="@id/ivGrayScaleImageTwo"
+			app:layout_constraintTop_toBottomOf="@id/tvHashLengthImageTwo">
+
+			<ImageView
+				android:id="@+id/ivSuccessOrFailImageTwo"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				tools:src="@drawable/ic_failed" />
+
+			<TextView
+				android:id="@+id/tvSuccessOrFailImageTwo"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				tools:text="Провал" />
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/btnClose"
+			style="@style/S20White"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			android:background="@drawable/background_purple_button_selector"
+			android:gravity="center"
+			android:paddingVertical="16dp"
+			android:text="@string/show_compare_process_close_button_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/llFiveStepInfoImageTwo" />
+
+		<View
+			android:id="@+id/viewBottomSeparator"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			app:layout_constraintTop_toBottomOf="@id/btnClose" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

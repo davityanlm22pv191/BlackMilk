@@ -27,11 +27,11 @@
 		app:layout_constraintStart_toEndOf="@id/flCurrentImageOne"
 		app:layout_constraintTop_toTopOf="@id/flCurrentImageOne" />
 
-
 	<View
 		android:id="@+id/viewVerticalSeparator"
 		android:layout_width="2dp"
 		android:layout_height="0dp"
+		android:layout_marginTop="16dp"
 		android:background="@color/white"
 		app:layout_constraintBottom_toBottomOf="@id/viewHorizontalSeparator"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
 
 		<ImageView
 			android:id="@+id/ivCurrentImageOne"
-			android:layout_width="match_parent"
+			android:layout_width="150dp"
 			android:layout_height="150dp"
 			android:background="@drawable/background_current_image"
 			android:padding="2dp"
@@ -141,7 +141,7 @@
 			style="@style/S16White"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/background_choose_button_gallery"
+			android:background="@drawable/background_purple_button_selector"
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_gallery"
@@ -155,7 +155,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:background="@drawable/background_choose_button_gallery"
+			android:background="@drawable/background_purple_button_selector"
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_link"
@@ -190,7 +190,7 @@
 			style="@style/S16White"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/background_choose_button_gallery"
+			android:background="@drawable/background_purple_button_selector"
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_gallery"
@@ -204,7 +204,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
-			android:background="@drawable/background_choose_button_gallery"
+			android:background="@drawable/background_purple_button_selector"
 			android:paddingHorizontal="44dp"
 			android:paddingVertical="16dp"
 			android:text="@string/main_screen_button_choose_from_link"
