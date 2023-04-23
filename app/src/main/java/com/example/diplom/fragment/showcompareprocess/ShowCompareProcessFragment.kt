@@ -110,28 +110,41 @@ class ShowCompareProcessFragment(
 			setPixelsInfo(this)
 
 			/** Step fifth */
-			setCreatingHashResult(this)
+			setPerceptualHashResult(this)
 
 			/** Step sixth */
-			setResult(this)
+			setCompareResult(this)
 
 		}
 	}
 
-	private fun setResult(view: View) {
+	private fun setCompareResult(view: View) {
 		val ivCompareResult = view.findViewById<ImageView>(R.id.ivCompareResult)
 		hashImageOne?.let { hashOne ->
 			hashImageTwo?.let { hashTwo ->
 				if (hashOne.bitLength() != hashTwo.bitLength()) {
 					ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 				} else {
-					ivCompareResult.setImageResource(R.drawable.ic_equal_green)
+					when (perceptualHash.hammingDistance(hashOne, hashTwo)){
+						0 -> {
+							ivCompareResult.setImageResource(R.drawable.ic_equal_green)
+						}
+						in 1..10 -> {
+							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
+						}
+						in 11..20 -> {
+							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
+						}
+						else -> {
+							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
+						}
+					}
 				}
 			}
 		}
 	}
 
-	private fun setCreatingHashResult(view: View) {
+	private fun setPerceptualHashResult(view: View) {
 		val accuracyByApiLevel = perceptualHash.getAccuracyByApiLevel()
 		view.apply {
 			grayScaleImageOne?.let { bitmap ->

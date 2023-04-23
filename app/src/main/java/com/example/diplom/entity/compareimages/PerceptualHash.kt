@@ -20,9 +20,29 @@ class PerceptualHash {
 		const val VERY_STRONG = 256
 
 		const val COLOR_FILTER_COUNT = 3
+
+		const val HASHES_NOT_COMPARE = 30
 	}
 
 	// region ================ Public ====================
+
+	fun hammingDistance(hash1: BigInteger, hash2: BigInteger): Int {
+		if (hash1.bitLength() != hash2.bitLength()) {
+			return HASHES_NOT_COMPARE
+		}
+
+		var distance = 0
+		var diffBits = hash1.xor(hash2)
+
+		while (diffBits != BigInteger.ZERO) {
+			if (diffBits.and(BigInteger.ONE) != BigInteger.ZERO) {
+				distance++
+			}
+			diffBits = diffBits.shiftRight(1)
+		}
+
+		return distance
+	}
 
 	fun convertBitmapToBinaryHashString(imageBitmap: Bitmap, accuracy: Int): String {
 		if (imageBitmap.width <= 0 || imageBitmap.height <= 0) {

@@ -22,10 +22,11 @@
 		android:id="@+id/ivResultOfCompare"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		app:layout_constraintBottom_toBottomOf="@id/flCurrentImageOne"
-		app:layout_constraintEnd_toStartOf="@id/flCurrentImageTwo"
-		app:layout_constraintStart_toEndOf="@id/flCurrentImageOne"
-		app:layout_constraintTop_toTopOf="@id/flCurrentImageOne" />
+		android:layout_margin="16dp"
+		app:layout_constraintBottom_toTopOf="@id/btnCompare"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/switchShowCompare" />
 
 	<View
 		android:id="@+id/viewVerticalSeparator"
@@ -233,7 +234,7 @@
 		android:layout_marginTop="16dp"
 		android:checked="false"
 		android:text="@string/main_screen_show_compare_process"
-		android:visibility="gone"
+		android:visibility="visible"
 		app:layout_constraintTop_toBottomOf="@id/viewHorizontalSeparator"
 		app:thumbTint="@color/purple_500"
 		app:trackTint="@color/purple_200" />
