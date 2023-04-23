@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
 import com.example.diplom.entity.compareimages.PerceptualHash
+import com.example.diplom.fragment.home.callback.HomeCallback
 import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessParams
 import java.math.BigInteger
 
@@ -41,6 +42,9 @@ class ShowCompareProcessFragment(
 	private var hashImageOne: BigInteger? = null
 	private var hashImageTwo: BigInteger? = null
 
+	/** Step sixth */
+	private var isDuplicate: Boolean = false
+
 	//region ==================== Object creation ====================
 
 	companion object {
@@ -59,6 +63,8 @@ class ShowCompareProcessFragment(
 	// region ==================== ShowCompareProcessContract ====================
 
 	override fun close() {
+		val callback = parentFragment as? HomeCallback
+		callback?.setCompareResult(isDuplicate)
 		parentFragmentManager.beginTransaction()
 			.remove(this)
 			.commit()
@@ -123,19 +129,24 @@ class ShowCompareProcessFragment(
 		hashImageOne?.let { hashOne ->
 			hashImageTwo?.let { hashTwo ->
 				if (hashOne.bitLength() != hashTwo.bitLength()) {
+					isDuplicate = false
 					ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 				} else {
-					when (perceptualHash.hammingDistance(hashOne, hashTwo)){
+					when (perceptualHash.hammingDistance(hashOne, hashTwo)) {
 						0 -> {
+							isDuplicate = true
 							ivCompareResult.setImageResource(R.drawable.ic_equal_green)
 						}
 						in 1..10 -> {
+							isDuplicate = false
 							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 						}
 						in 11..20 -> {
+							isDuplicate = false
 							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 						}
 						else -> {
+							isDuplicate = false
 							ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 						}
 					}

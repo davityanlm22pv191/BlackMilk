@@ -101,7 +101,7 @@ class ChooseImageFromLinkFragment(
 
 		bitmapSrc?.let { bitmap ->
 			lastCorrectLink?.let { link ->
-				callBack?.onDataReceived(bitmap, link, imageNumber)
+				callBack?.setImageFromLink(bitmap, link, imageNumber)
 			}
 		}
 	}

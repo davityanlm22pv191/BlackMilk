@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 
 	// region ==================== HomeCallback ====================
 
-	override fun onDataReceived(bitmapImage: Bitmap, link: String, imageNumber: Int) {
+	override fun setImageFromLink(bitmapImage: Bitmap, link: String, imageNumber: Int) {
 		when (imageNumber) {
 			PICK_IMAGE_ONE -> {
 				this.view?.findViewById<TextView>(R.id.tvImageOneNotSelectedMsg)?.isVisible = false
@@ -103,6 +103,19 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 			childFragmentManager.beginTransaction().remove(fragment).commit()
 		}
 		checkToReadyCompare()
+	}
+
+	override fun setCompareResult(isDuplicate: Boolean) {
+		val ivResult = view?.findViewById<ImageView>(R.id.ivResultOfCompare)
+		if (isDuplicate) {
+			ivResult?.let {
+				ivResult.setImageResource(R.drawable.ic_equal_green)
+			}
+		} else {
+			ivResult?.let {
+				ivResult.setImageResource(R.drawable.ic_not_equal_red)
+			}
+		}
 	}
 
 	// endregion
