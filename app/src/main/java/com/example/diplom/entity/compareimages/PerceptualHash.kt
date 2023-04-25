@@ -13,11 +13,11 @@ import java.math.BigInteger
 class PerceptualHash {
 
 	private companion object {
-		const val VERY_WEAK = 16
-		const val WEAK = 32
-		const val NORMAL = 64
-		const val STRONG = 128
-		const val VERY_STRONG = 256
+		const val VERY_WEAK = 8
+		const val WEAK = 16
+		const val NORMAL = 32
+		const val STRONG = 64
+		const val VERY_STRONG = 128
 
 		const val COLOR_FILTER_COUNT = 3
 
@@ -26,13 +26,54 @@ class PerceptualHash {
 
 	// region ================ Public ====================
 
-	fun hammingDistance(hash1: BigInteger, hash2: BigInteger): Int {
-		if (hash1.bitLength() != hash2.bitLength()) {
+	fun getPerceptualHashCompare(imageBitmapOne: Bitmap, imageBitmapTwo: Bitmap): Boolean {
+		val accuracy = this.getAccuracyByApiLevel()
+
+		/** Step first */
+		val scaledImageOne = this.getScaledBitmap(imageBitmapOne)
+		val scaledImageTwo = this.getScaledBitmap(imageBitmapTwo)
+
+		/** Step second */
+		val grayScaleImageOne = this.getGrayScaleBitmap(scaledImageOne)
+		val grayScaleImageTwo = this.getGrayScaleBitmap(scaledImageTwo)
+
+		/** Step third */
+		val hashImageOne = convertBitmapToBinaryHash(grayScaleImageOne, accuracy)
+		val hashImageTwo = convertBitmapToBinaryHash(grayScaleImageTwo, accuracy)
+
+		/** Step fourth */
+		hashImageOne?.let { hashOne ->
+			hashImageTwo?.let { hashTwo ->
+				if (hashOne.bitLength() != hashTwo.bitLength()) {
+					return false
+				} else {
+					when (this.hammingDistance(hashOne, hashTwo)) {
+						0 -> {
+							return true
+						}
+						in 1..10 -> {
+							return false
+						}
+						in 11..20 -> {
+							return false
+						}
+						else -> {
+							return false
+						}
+					}
+				}
+			}
+		}
+		return false
+	}
+
+	fun hammingDistance(hashOne: BigInteger, hashTwo: BigInteger): Int {
+		if (hashOne.bitLength() != hashTwo.bitLength()) {
 			return HASHES_NOT_COMPARE
 		}
 
 		var distance = 0
-		var diffBits = hash1.xor(hash2)
+		var diffBits = hashOne.xor(hashTwo)
 
 		while (diffBits != BigInteger.ZERO) {
 			if (diffBits.and(BigInteger.ONE) != BigInteger.ZERO) {

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
+import com.example.diplom.entity.compareimages.PerceptualHash
 import com.example.diplom.fragment.chooseimagefromlink.ChooseImageFromLinkFragment
 import com.example.diplom.fragment.home.callback.HomeCallback
 import com.example.diplom.fragment.home.model.CurrentImage
@@ -21,6 +22,9 @@ import com.example.diplom.fragment.showcompareprocess.model.ShowCompareProcessPa
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class HomeFragment : Fragment(), HomeContract, HomeCallback {
+
+	/** Init class for alg process */
+	private val perceptualHash = PerceptualHash()
 
 	private var imageOne: CurrentImage = CurrentImage(null, null)
 	private var imageTwo: CurrentImage = CurrentImage(null, null)
@@ -127,16 +131,38 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 			val imageOneBitmap: Bitmap = imageOne.bitmap!!
 			val imageTwoBitmap: Bitmap = imageTwo.bitmap!!
 
-			val fragment: Fragment = ShowCompareProcessFragment.newInstance(
-				ShowCompareProcessParams(
-					imageOneBitmap,
-					imageTwoBitmap
-				)
-			)
+			val switcher = view?.findViewById<SwitchMaterial>(R.id.switchShowCompare)
 
-			childFragmentManager.beginTransaction()
-				.add(R.id.rootElement, fragment, SHOW_COMPARE_PROCESS)
-				.commitNow()
+			when (switcher?.isChecked) {
+				true -> {
+					val fragment: Fragment = ShowCompareProcessFragment.newInstance(
+						ShowCompareProcessParams(
+							imageOneBitmap,
+							imageTwoBitmap
+						)
+					)
+
+					childFragmentManager.beginTransaction()
+						.add(R.id.rootElement, fragment, SHOW_COMPARE_PROCESS)
+						.commitNow()
+				}
+				false -> {
+					setCompareResult(
+						perceptualHash.getPerceptualHashCompare(
+							imageOneBitmap,
+							imageTwoBitmap
+						)
+					)
+				}
+				else -> {
+					setCompareResult(
+						perceptualHash.getPerceptualHashCompare(
+							imageOneBitmap,
+							imageTwoBitmap
+						)
+					)
+				}
+			}
 		}
 	}
 
