@@ -133,6 +133,7 @@ class ShowCompareProcessFragment(
 					isDuplicate = false
 					ivCompareResult.setImageResource(R.drawable.ic_not_equal_red)
 				} else {
+
 					when (perceptualHash.hammingDistance(hashOne, hashTwo)) {
 						0 -> {
 							isDuplicate = true
@@ -161,22 +162,30 @@ class ShowCompareProcessFragment(
 		view.apply {
 			val tvHashLengthImageOne = findViewById<TextView>(R.id.tvHashLengthImageOne)
 			val tvHashLengthImageTwo = findViewById<TextView>(R.id.tvHashLengthImageTwo)
-			grayScaleImageOne?.let { bitmap ->
-				hashImageOne = perceptualHash.convertBitmapToBinaryHash(
-					bitmap,
-					accuracyByApiLevel
-				)
-				tvHashLengthImageOne.text =
-					perceptualHash.convertBitmapToBinaryHashString(bitmap, accuracyByApiLevel)
+			grayScaleImageOne?.let { bitmapOne ->
+				grayScaleImageTwo?.let { bitmapTwo ->
+					hashImageOne = perceptualHash.convertBitmapToBinaryHash(
+						bitmapOne,
+						accuracyByApiLevel
+					)
+					val hashOneString = perceptualHash.convertBitmapToBinaryHashString(bitmapOne, accuracyByApiLevel)
+					tvHashLengthImageOne.text = hashOneString
+
+
+					hashImageTwo = perceptualHash.convertBitmapToBinaryHash(
+						bitmapTwo,
+						accuracyByApiLevel
+					)
+					val hashTwoString = perceptualHash.convertBitmapToBinaryHashString(bitmapTwo, accuracyByApiLevel)
+					tvHashLengthImageTwo.text = hashTwoString
+					val similarInPercent = getSimilarInPercent(
+						hashOneString,
+						hashTwoString
+					)
+					view.findViewById<TextView>(R.id.tvSimilarity).text = "$similarInPercent %"
+				}
 			}
-			grayScaleImageTwo?.let { bitmap ->
-				hashImageTwo = perceptualHash.convertBitmapToBinaryHash(
-					bitmap,
-					accuracyByApiLevel
-				)
-				tvHashLengthImageTwo.text =
-					perceptualHash.convertBitmapToBinaryHashString(bitmap, accuracyByApiLevel)
-			}
+
 			val tvSuccessOrFailImageOne = findViewById<TextView>(R.id.tvSuccessOrFailImageOne)
 			val ivSuccessOrFailImageOne = findViewById<ImageView>(R.id.ivSuccessOrFailImageOne)
 			val tvSuccessOrFailImageTwo = findViewById<TextView>(R.id.tvSuccessOrFailImageTwo)
@@ -214,6 +223,16 @@ class ShowCompareProcessFragment(
 				ivSuccessOrFailImageTwo.setImageResource(R.drawable.ic_failed)
 			}
 		}
+	}
+
+	private fun getSimilarInPercent(hashOne: String, hashTwo: String): Int {
+		var similarAmount = 0
+		for (i in hashOne.indices) {
+			if (hashOne[i] == hashTwo[i]) {
+				similarAmount += 1
+			}
+		}
+		return ((similarAmount.toFloat() / hashOne.length) * 100).toInt() - 1
 	}
 
 	private fun setPixelsInfo(view: View) {
