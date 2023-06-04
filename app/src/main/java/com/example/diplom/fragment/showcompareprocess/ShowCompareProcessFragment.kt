@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.diplom.R
 import com.example.diplom.entity.compareimages.PerceptualHash
 import com.example.diplom.fragment.home.callback.HomeCallback
@@ -158,30 +159,34 @@ class ShowCompareProcessFragment(
 	private fun setPerceptualHashResult(view: View) {
 		val accuracyByApiLevel = perceptualHash.getAccuracyByApiLevel()
 		view.apply {
+			val tvHashLengthImageOne = findViewById<TextView>(R.id.tvHashLengthImageOne)
+			val tvHashLengthImageTwo = findViewById<TextView>(R.id.tvHashLengthImageTwo)
 			grayScaleImageOne?.let { bitmap ->
 				hashImageOne = perceptualHash.convertBitmapToBinaryHash(
 					bitmap,
 					accuracyByApiLevel
 				)
+				tvHashLengthImageOne.text =
+					perceptualHash.convertBitmapToBinaryHashString(bitmap, accuracyByApiLevel)
 			}
 			grayScaleImageTwo?.let { bitmap ->
 				hashImageTwo = perceptualHash.convertBitmapToBinaryHash(
 					bitmap,
 					accuracyByApiLevel
 				)
+				tvHashLengthImageTwo.text =
+					perceptualHash.convertBitmapToBinaryHashString(bitmap, accuracyByApiLevel)
 			}
 			val tvSuccessOrFailImageOne = findViewById<TextView>(R.id.tvSuccessOrFailImageOne)
 			val ivSuccessOrFailImageOne = findViewById<ImageView>(R.id.ivSuccessOrFailImageOne)
-			val tvHashLengthImageOne = findViewById<TextView>(R.id.tvHashLengthImageOne)
 			val tvSuccessOrFailImageTwo = findViewById<TextView>(R.id.tvSuccessOrFailImageTwo)
 			val ivSuccessOrFailImageTwo = findViewById<ImageView>(R.id.ivSuccessOrFailImageTwo)
-			val tvHashLengthImageTwo = findViewById<TextView>(R.id.tvHashLengthImageTwo)
 
 			if (hashImageOne != null) {
-				tvHashLengthImageOne.text = resources.getString(
-					R.string.show_compare_process_hash_length,
-					hashImageOne?.bitLength()?.toString()
-				)
+//				tvHashLengthImageOne.text = resources.getString(
+//					R.string.show_compare_process_hash_length,
+//					hashImageOne?.bitLength()?.toString()
+//				)
 				tvSuccessOrFailImageOne.text =
 					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
 				tvSuccessOrFailImageOne.setTextAppearance(R.style.S18Green46)
@@ -194,10 +199,10 @@ class ShowCompareProcessFragment(
 			}
 
 			if (hashImageTwo != null) {
-				tvHashLengthImageTwo.text = resources.getString(
-					R.string.show_compare_process_hash_length,
-					hashImageTwo?.bitLength()?.toString()
-				)
+//				tvHashLengthImageTwo.text = resources.getString(
+//					R.string.show_compare_process_hash_length,
+//					hashImageTwo?.bitLength()?.toString()
+//				)
 				tvSuccessOrFailImageTwo.text =
 					resources.getString(R.string.show_compare_process_creating_perceptive_hash_code_success)
 				tvSuccessOrFailImageTwo.setTextAppearance(R.style.S18Green46)
@@ -280,10 +285,16 @@ class ShowCompareProcessFragment(
 	}
 
 	private fun setImagesSources(view: View) {
-		view.findViewById<ImageView>(R.id.ivSourceImageOne)
-			.setImageBitmap(showCompareProcessParams.imageBitmapOne)
-		view.findViewById<ImageView>(R.id.ivSourceImageTwo)
-			.setImageBitmap(showCompareProcessParams.imageBitmapTwo)
+		val imgOne = view.findViewById<ImageView>(R.id.ivSourceImageOne)
+		val imgTwo = view.findViewById<ImageView>(R.id.ivSourceImageTwo)
+
+		Glide.with(imgOne)
+			.load(showCompareProcessParams.imageBitmapOne)
+			.into(imgOne)
+
+		Glide.with(imgTwo)
+			.load(showCompareProcessParams.imageBitmapTwo)
+			.into(imgTwo)
 	}
 
 	// endregion

@@ -12,6 +12,7 @@
 	<string name="main_screen_image_not_selected_msg">Изображение не выбрано.\n Используйте кнопки ниже</string>
 	<string name="main_screen_show_compare_process">Показать сравнение подробно</string>
 	<string name="main_screen_button_compare_images">Сравнить</string>
+	<string name="main_screen_background_mode_title">Работа в фоне</string>
 	<!--end region-->
 
 	<!--choose image from link region-->

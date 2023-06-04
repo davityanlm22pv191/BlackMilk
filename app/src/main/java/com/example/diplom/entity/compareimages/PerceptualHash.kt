@@ -17,7 +17,7 @@ class PerceptualHash {
 		const val WEAK = 16
 		const val NORMAL = 32
 		const val STRONG = 64
-		const val VERY_STRONG = 128
+		const val VERY_STRONG = 8
 
 		const val COLOR_FILTER_COUNT = 3
 

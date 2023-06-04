@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.diplom.R
@@ -47,6 +48,14 @@ class HomeFragment : Fragment(), HomeContract, HomeCallback {
 		initUI(view)
 
 		return view
+	}
+
+	override fun onResume() {
+		super.onResume()
+		val backgroundColor = ContextCompat.getColor(requireContext(), R.color.transparent)
+		requireActivity().window.decorView.systemUiVisibility =
+			requireActivity().window.decorView.systemUiVisibility or View.STATUS_BAR_HIDDEN
+		requireActivity().window.statusBarColor = backgroundColor
 	}
 
 	// endregion

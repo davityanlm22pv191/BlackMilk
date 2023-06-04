@@ -24,8 +24,8 @@
 		android:layout_height="0dp"
 		android:layout_margin="16dp"
 		app:layout_constraintBottom_toTopOf="@id/btnCompare"
-		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/switchShowCompare" />
 
 	<View
@@ -238,6 +238,19 @@
 		app:layout_constraintTop_toBottomOf="@id/viewHorizontalSeparator"
 		app:thumbTint="@color/purple_500"
 		app:trackTint="@color/purple_200" />
+
+	<com.google.android.material.switchmaterial.SwitchMaterial
+		style="@style/S18White"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="16dp"
+		android:layout_marginTop="16dp"
+		android:text="@string/main_screen_background_mode_title"
+		android:visibility="visible"
+		app:layout_constraintTop_toBottomOf="@id/switchShowCompare"
+		app:thumbTint="@color/purple_500"
+		app:trackTint="@color/purple_200" />
+
 
 	<TextView
 		android:id="@+id/btnCompare"
