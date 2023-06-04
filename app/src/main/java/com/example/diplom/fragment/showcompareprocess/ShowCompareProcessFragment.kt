@@ -182,7 +182,7 @@ class ShowCompareProcessFragment(
 						hashOneString,
 						hashTwoString
 					)
-					view.findViewById<TextView>(R.id.tvSimilarity).text = "$similarInPercent %"
+					view.findViewById<TextView>(R.id.tvSimilarity).text = "Схожесть: $similarInPercent %"
 				}
 			}
 
