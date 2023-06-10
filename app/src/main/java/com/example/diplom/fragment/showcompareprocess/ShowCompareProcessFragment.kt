@@ -178,11 +178,6 @@ class ShowCompareProcessFragment(
 					)
 					val hashTwoString = perceptualHash.convertBitmapToBinaryHashString(bitmapTwo, accuracyByApiLevel)
 					tvHashLengthImageTwo.text = hashTwoString
-					val similarInPercent = getSimilarInPercent(
-						hashOneString,
-						hashTwoString
-					)
-					view.findViewById<TextView>(R.id.tvSimilarity).text = "Схожесть: $similarInPercent %"
 				}
 			}
 
